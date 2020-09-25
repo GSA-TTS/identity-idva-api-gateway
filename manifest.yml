@@ -9,7 +9,7 @@ applications:
   services:
     - give-api-gateway-data  
   routes:
-    - route: dev.give.app.cloud.gov
+    - route: dev-give.app.cloud.gov
   env:
     KONG_DATABASE: postgres
     KONG_PROXY_LISTEN: 0.0.0.0:8080
