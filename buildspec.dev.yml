@@ -3,8 +3,8 @@ version: 0.2
 env:
   shell: bash
   secrets-manager:
-    GIVE_CI_USERNAME: give-ci-sandbox-secrets:GIVE_CI_USERNAME
-    GIVE_CI_PASSWORD: give-ci-sandbox-secrets:GIVE_CI_PASSWORD
+    GIVE_CI_USERNAME: give-ci-dev-secrets:GIVE_CI_USERNAME
+    GIVE_CI_PASSWORD: give-ci-dev-secrets:GIVE_CI_PASSWORD
 phases:
   install:
     commands:
@@ -18,3 +18,5 @@ phases:
       - cf login -a https://api.fr.cloud.gov -u $GIVE_CI_USERNAME -p $GIVE_CI_PASSWORD
       # Push app to cloud.gov and create a random route to avoid collision, but don't start it yet
       - cf push --vars-file vars.dev.yml
+      # Setup services and routes for kong
+      - ./post-deployment.sh
