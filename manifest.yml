@@ -2,6 +2,8 @@
 applications:
 - name: give-api-gateway
   stack: cflinuxfs3
+  instances: ((instances))
+  memory: ((memory))
   buildpacks: 
     - https://github.com/cloudfoundry/apt-buildpack
     - https://github.com/cloudfoundry/binary-buildpack
@@ -9,7 +11,7 @@ applications:
   services:
     - give-api-gateway-data  
   routes:
-    - route: dev-give.app.cloud.gov
+    - route: give-((environment)).app.cloud.gov
   env:
     KONG_DATABASE: postgres
     KONG_PROXY_LISTEN: 0.0.0.0:8080
