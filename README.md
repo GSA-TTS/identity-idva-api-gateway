@@ -49,7 +49,7 @@ The API Gateway is secured with Kong's HMAC Authentication plugin. A digital sig
 
 The generation of a digital signature can be handled by [this script](local-test-scripts\hmac-dig-sig.js). This script is to be used as the Pre-request Script wihtin Postman. The following headers should be set:
 - `Date : {{timestamp}}`
-- `Authorization : hmac username="pshumate", algorithm="hmac-sha256", headers="date request-line", signature={{signature}}`
+- `Authorization : hmac username="pshumate", algorithm="hmac-sha256", headers="date request-line", signature="{{signature}}"`
 
 The authorization header is in compliance with [Kong's Signature Authentication Scheme](https://docs.konghq.com/hub/kong-inc/hmac-auth/#signature-authentication-scheme).
 
