@@ -6,7 +6,7 @@ let signing_string = "date: " + timestamp + "\n"
     + pm.request.url.getPath() + " "
     + "HTTP/1.1";
 
-const secret_key = /* INSERT SECRET HERE */;
+const secret_key = "INSER KEY HERE"; 
 
 const hmac_encoded_str = CryptoJS.HmacSHA256(signing_string, secret_key);
 
