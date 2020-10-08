@@ -4,7 +4,6 @@
 - [Git Bash](https://git-scm.com/downloads)
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
-- [Postman](https://www.postman.com/downloads/)
 
 ### Setup
 
@@ -44,15 +43,6 @@ to tail the logs. Include `--recent` if you want to just dump the logs instead.
 ### HMAC Authentication
 
 The API Gateway is secured with Kong's HMAC Authentication plugin. A digital signature is required in the header of a request that complies with the [Kong HMAC signature specification](https://docs.konghq.com/hub/kong-inc/hmac-auth/#signature-string-construction).
-
-### Making an Authenticated Request (in Postman)
-
-The generation of a digital signature can be handled by [this script](local-test-scripts\hmac-dig-sig.js). This script is to be used as the Pre-request Script wihtin Postman. The following headers should be set:
-- `Date : {{timestamp}}`
-- `Authorization : hmac username="pshumate", algorithm="hmac-sha256", headers="date request-line", signature="{{signature}}"`
-
-The authorization header is in compliance with [Kong's Signature Authentication Scheme](https://docs.konghq.com/hub/kong-inc/hmac-auth/#signature-authentication-scheme).
-
 
 ### References
 - [cloud-gov/cf-kong](https://github.com/cloud-gov/cf-kong)
