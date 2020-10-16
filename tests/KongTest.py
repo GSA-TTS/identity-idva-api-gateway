@@ -9,10 +9,10 @@ def test_get_kong_plugins_verify_hmac():
     response = requests.get("http://localhost:8081/plugins")
     body_dictionary = json.loads(response.text)
 
-    data = body_dictionary["data"]
+    plugin_data = body_dictionary["data"]
 
-    for x in range(len(data)):
-        if data[x]["name"] == "hmac-auth":
+    for x in range(len(plugin_data)):
+        if plugin_data[x]["name"] == "hmac-auth":
             assert True
             return
     assert False
