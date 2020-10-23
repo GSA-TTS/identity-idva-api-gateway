@@ -4,4 +4,4 @@ keys:
 repos:
 - deb https://kong.bintray.com/kong-deb bionic main
 packages:
-- kong=2.1.1
+- kong=2.2.0
