@@ -88,14 +88,14 @@ public class PipelineStack extends Stack {
                 .templatePath(buildOutput.atPath("packaged.yaml"))
                 .stackName("gateway-service")
                 .adminPermissions(true)
-                .changeSetName("sam-app-dev-changeset")
+                .changeSetName("gateway-service-changeset")
                 .runOrder(1)
                 .build());
 
         CloudFormationExecuteChangeSetAction executeChangeSet = new CloudFormationExecuteChangeSetAction(CloudFormationExecuteChangeSetActionProps.builder()
                 .actionName("Deploy")
                 .stackName("sam-app")
-                .changeSetName("sam-app-dev-changeset")
+                .changeSetName("gateway-service-changeset")
                 .runOrder(2)
                 .build());
 
