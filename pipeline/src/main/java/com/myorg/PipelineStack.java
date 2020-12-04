@@ -44,7 +44,7 @@ public class PipelineStack extends Stack {
         GitHubSourceAction gitHubSource = new GitHubSourceAction(GitHubSourceActionProps.builder()
                 .actionName("GitHub_Source")
                 .repo("identity-give-gateway-service")
-                .owner("18f")
+                .owner("dzaslavskiy")
                 .branch("main")
                 .oauthToken(SecretValue.secretsManager(secretsManagerSecretId.getValueAsString(), SecretsManagerSecretOptions.builder()
                         .jsonField(secretsManagerJsonKey.getValueAsString())
