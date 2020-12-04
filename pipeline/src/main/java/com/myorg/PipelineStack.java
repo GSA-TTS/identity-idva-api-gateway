@@ -86,7 +86,7 @@ public class PipelineStack extends Stack {
         CloudFormationCreateReplaceChangeSetAction createChangeSet = new CloudFormationCreateReplaceChangeSetAction(CloudFormationCreateReplaceChangeSetActionProps.builder()
                 .actionName("CreateChangeSet")
                 .templatePath(buildOutput.atPath("packaged.yaml"))
-                .stackName("sam-app")
+                .stackName("gateway-service")
                 .adminPermissions(true)
                 .changeSetName("sam-app-dev-changeset")
                 .runOrder(1)
