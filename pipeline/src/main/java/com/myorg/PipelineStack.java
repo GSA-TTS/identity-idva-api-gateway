@@ -3,16 +3,12 @@ package com.myorg;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
-import software.amazon.awscdk.core.CfnParameter;
-import software.amazon.awscdk.core.CfnParameterProps;
 import software.amazon.awscdk.core.SecretsManagerSecretOptions;
 import software.amazon.awscdk.core.SecretValue;
 import software.amazon.awscdk.services.s3.Bucket;
 import software.amazon.awscdk.services.codebuild.*;
-import software.amazon.awscdk.services.codecommit.*;
 import software.amazon.awscdk.services.codepipeline.*;
 import software.amazon.awscdk.services.codepipeline.actions.*;
-import software.amazon.awscdk.services.secretsmanager.*;
 import java.util.*;
 import static software.amazon.awscdk.services.codebuild.LinuxBuildImage.AMAZON_LINUX_2;
 
@@ -24,15 +20,6 @@ public class PipelineStack extends Stack {
     public PipelineStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
-        CfnParameter secretsManagerSecretId = new CfnParameter(this, "secretsManagerSecretId", CfnParameterProps.builder()
-                .type("String")
-                .description("The id of the secrets manager secret used to store the GitHub oauth token.")
-                .build());
-        CfnParameter secretsManagerJsonKey = new CfnParameter(this, "secretsManagerJsonKey", CfnParameterProps.builder()
-                .type("String")
-                .description("The json key corresponding to the oauth token in the Secret.")
-                .build());
-
         // The code that defines your stack goes here
         Bucket artifactsBucket = new Bucket(this, "ArtifactsBucket");
 
@@ -41,14 +28,21 @@ public class PipelineStack extends Stack {
 
         Artifact sourceOutput = new Artifact("sourceOutput");
 
-        GitHubSourceAction gitHubSource = new GitHubSourceAction(GitHubSourceActionProps.builder()
+        SecretValue connectionARN = SecretValue.secretsManager("give_github_connection_arn",
+                        SecretsManagerSecretOptions.builder()
+                                        .jsonField("arn")
+                                        .build()
+        );
+
+        // Don't be fooled by the name, the source code is being pulled from GitHub but the 
+        // BitBucketSourceAction is the only CDK souce action construct that uses a CodeStar
+        // connection to integrate with an outside ource. See https://github.com/aws/aws-cdk/issues/10632
+        BitBucketSourceAction gitHubSource = new BitBucketSourceAction(BitBucketSourceActionProps.builder()
                 .actionName("GitHub_Source")
+                .connectionArn(connectionARN.toString())
                 .repo("identity-give-gateway-service")
-                .owner("dzaslavskiy")
+                .owner("18F")
                 .branch("main")
-                .oauthToken(SecretValue.secretsManager(secretsManagerSecretId.getValueAsString(), SecretsManagerSecretOptions.builder()
-                        .jsonField(secretsManagerJsonKey.getValueAsString())
-                        .build()))
                 .output(sourceOutput)
                 .build());
 
@@ -83,19 +77,21 @@ public class PipelineStack extends Stack {
                 .build());
 
         // Deploy stage
+        String stack_name = "gateway-service";
+        String change_set_name = stack_name + "-changeset";
         CloudFormationCreateReplaceChangeSetAction createChangeSet = new CloudFormationCreateReplaceChangeSetAction(CloudFormationCreateReplaceChangeSetActionProps.builder()
                 .actionName("CreateChangeSet")
                 .templatePath(buildOutput.atPath("packaged.yaml"))
-                .stackName("gateway-service")
+                .stackName(stack_name)
                 .adminPermissions(true)
-                .changeSetName("gateway-service-changeset")
+                .changeSetName(change_set_name)
                 .runOrder(1)
                 .build());
 
         CloudFormationExecuteChangeSetAction executeChangeSet = new CloudFormationExecuteChangeSetAction(CloudFormationExecuteChangeSetActionProps.builder()
                 .actionName("Deploy")
-                .stackName("sam-app")
-                .changeSetName("gateway-service-changeset")
+                .stackName(stack_name)
+                .changeSetName(change_set_name)
                 .runOrder(2)
                 .build());
 
