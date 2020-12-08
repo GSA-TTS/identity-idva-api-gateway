@@ -1,6 +1,6 @@
 from chalice import Chalice
 
-app = Chalice(app_name="app")
+app = Chalice(app_name="gateway-service")
 
 
 @app.route("/")
