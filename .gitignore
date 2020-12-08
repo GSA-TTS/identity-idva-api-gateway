@@ -1,16 +1,6 @@
-.aws-sam/
-packaged.yaml
-
-.classpath.txt
-target
-.classpath
-.project
-.idea
-.settings
-.vscode
-*.iml
-
-# CDK asset staging directory
-.cdk.staging
+app/.chalice/deployments/
+app/.chalice/deployed/
+app/.chalice/venv/
+venv*
+__pycache__
 cdk.out
-
