@@ -12,7 +12,7 @@ def test_get_kong_plugins_verify_hmac():
     plugin_data = body_dictionary["data"]
 
     for x in range(len(plugin_data)):
-        if plugin_data[x]["name"] == "hmac-auth":
+        if plugin_data[x]["name"] == "key-auth":
             assert True
             return
     assert False

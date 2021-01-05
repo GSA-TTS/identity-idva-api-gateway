@@ -59,10 +59,6 @@ cf logs <your-gateway-name>
 ```
 to tail the logs. Include `--recent` if you want to just dump the logs instead.
 
-### HMAC Authentication
-
-The API Gateway is secured with Kong's HMAC Authentication plugin. A digital signature is required in the header of a request that complies with the [Kong HMAC signature specification](https://docs.konghq.com/hub/kong-inc/hmac-auth/#signature-string-construction).
-
 ### References
 - [cloud-gov/cf-kong](https://github.com/cloud-gov/cf-kong)
 - [Kong Quickstart](https://docs.konghq.com/2.1.x/getting-started/quickstart/)
