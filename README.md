@@ -3,9 +3,10 @@
 ### Pre-requisites
 - [Git Bash](https://git-scm.com/downloads)
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
+- [Python 3.9](https://www.python.org/downloads/release/python-390/#:~:text=Files%20%20%20%20Version%20%20%20,%20%208757017%20%206%20more%20rows)
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
 
-### Setup
+### Initial Setup
 
 Follow the directions outlined in [Cloud.gov CLI Setup](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
 
@@ -27,6 +28,24 @@ cf push <your-gateway-name>
 This creates a new API Gateway application in your sandbox environment with the the endpoint: https://your-gateway-name.app.cloud.gov. 
 
 You can visit the [Cloud.gov Dashboard](https://dashboard.fr.cloud.gov/applications) to view the status of the deployment.
+
+### Continued Deployment
+
+There is no CI/CD in place yet for the continued deployment of the Kong api gateway microservice. To manually deploy, set up a python virtual environment and run:
+
+```
+./deploy.sh
+```
+
+### Admin API Access
+
+In order to access the Kong Admin API, an SSH tunnel must be set up. Run:
+
+```
+cf ssh -N -T -L 8081:localhost:8081 give-api-gateway
+```
+
+_8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. This is due to Cloud Foundry restricting 8080 as the default port_
 
 
 ### Troubleshooting
