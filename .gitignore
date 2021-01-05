@@ -1,6 +1,4 @@
-app/.chalice/deployments/
-app/.chalice/deployed/
-app/.chalice/venv/
+tests/__pycache__/
+.pytest_cache/
+
 venv*
-__pycache__
-cdk.out
