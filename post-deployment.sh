@@ -19,5 +19,5 @@ curl -X POST http://localhost:8081/services/auth-service/plugins/ \
     --data "config.enable_authorization_code=true" \
     --data "config.global_credentials=true" \
     --data "config.accept_http_if_already_terminated=true"
-#pytest tests/test_kong.py
+pytest tests/test_kong.py
 kill $PID
