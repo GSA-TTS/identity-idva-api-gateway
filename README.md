@@ -48,6 +48,10 @@ cf ssh -N -T -L 8081:localhost:8081 give-api-gateway
 _8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. This is due to Cloud Foundry restricting 8080 as the default port_
 
 
+### OAuth 2.0 Authorization
+
+The GIVE API Gateway is deployed with a Kong OAuth 2.0 authorization plugin with Client Credentials Grant enabled. All requests must follow the [Client Credentials Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.4).
+
 ### Troubleshooting
 
 Since this is not a compiled application, there isn't any debugging involved. You can set the [log level](https://docs.konghq.com/2.1.x/logging/) in the [manifest.yml](/manifest.yml) file and the view the logs in the Cloud.gov application dashboard under **Log Stream**.
