@@ -31,6 +31,16 @@ curl -X POST http://localhost:8081/services/auth-service/plugins/ \
     --data "config.global_credentials=true" \
     --data "config.accept_http_if_already_terminated=true"
 
+# add global oauth plugin
+curl -X POST http://localhost:8081/plugins/ \
+    --data "name=oauth2"  \
+    --data "config.scopes=rpname" \
+    --data "config.mandatory_scope=true" \
+    --data "config.enable_authorization_code=true" \
+    --data "config.enable_client_credentials=true" \
+    --data "config.global_credentials=true" \
+    --data "config.accept_http_if_already_terminated=true"
+
 # run unit tests
 pytest tests/test_kong.py
 kill $PID
