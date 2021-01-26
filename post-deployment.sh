@@ -51,7 +51,7 @@ curl -X POST \
 # add GET route to idemia service
 curl -i -X POST \
     --url http://localhost:8081/services/idemia-microservice/routes \
-    --data 'paths[]=/idemia' \
+    --data 'paths[]=/ipp' \
     --data 'methods[]=GET'
 
 # run unit tests
