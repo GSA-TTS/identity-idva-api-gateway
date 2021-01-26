@@ -21,7 +21,7 @@ export KONG_LUA_PACKAGE_PATH=$LUA_PATH
 export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
 # Start kong
-kong migrations bootstrap
+kong migrations up
 kong start --vv
 
 # Keep this process alive

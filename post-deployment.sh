@@ -41,6 +41,19 @@ curl -X POST http://localhost:8081/plugins/ \
     --data "config.global_credentials=true" \
     --data "config.accept_http_if_already_terminated=true"
 
+
+# add idemia service
+curl -X POST \
+    --url "localhost:8081/services" \
+    --data "name=idemia-microservice" \
+    --data "url=http://ipp-idemia-busy-eland-mg.app.cloud.gov/"
+
+# add GET route to idemia service
+curl -i -X POST \
+    --url http://localhost:8081/services/idemia-microservice/routes \
+    --data 'paths[]=/idemia' \
+    --data 'methods[]=GET'
+
 # run unit tests
 pytest tests/test_kong.py
 kill $PID
