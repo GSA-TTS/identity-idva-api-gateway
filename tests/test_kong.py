@@ -1,13 +1,31 @@
 import requests
 import json
+import pytest
 
-def test_get_kong_check_status_code():
-    response = requests.get("http://localhost:8081")
-    assert response.status_code == 200
+def pytest_namespace():
+    return {"json_response": ""}
 
-def test_get_kong_plugins_verify_oauth():
-    response = requests.get("http://localhost:8081/plugins/")
-    body_dictionary = json.loads(response.text)
+@pytest.fixture
+def status_code():
+    pytest.json_response = requests.get("http://localhost:8081")
+
+@pytest.fixture
+def oauth_plugin():
+    pytest.json_response = requests.get("http://localhost:8081/services/auth-service/plugins/")
+
+@pytest.fixture
+def auth_service():
+    pytest.json_response = response = requests.get("http://localhost:8081/services/auth-service")
+
+@pytest.fixture
+def idemia_service():
+    pytest.json_response = response = requests.get("http://localhost:8081/services/idemia-microservice")
+
+def test_get_kong_check_status_code(status_code):
+    assert pytest.json_response.status_code == 200
+
+def test_get_kong_plugins_verify_global_oauth(oauth_plugin):
+    body_dictionary = json.loads(pytest.json_response.text)
 
     data = body_dictionary["data"]
 
@@ -15,22 +33,14 @@ def test_get_kong_plugins_verify_oauth():
         plugin = data[x]
         if plugin["name"] == "oauth2":
             config = plugin["config"]
-            if config["enable_client_credentials"] == True and config["enable_authorization_code"] == True and config["global_credentials"] == True:
+            if config["enable_client_credentials"] and config["enable_authorization_code"] and config["global_credentials"]:
                 assert True
                 return
             assert False
     assert False
 
-def test_get_kong_service_verify_auth_service():
-    response = requests.get("http://localhost:8081/services/")
-    body_dictionary = json.loads(response.text)
+def test_get_kong_service_verify_auth_service(auth_service):
+    assert pytest.json_response.status_code == 200
 
-    data = body_dictionary["data"]
-
-    for x in range(len(data)):
-        service = data[x]
-        if service["name"] == "auth-service":
-            assert True
-            return
-
-    assert False
+def test_get_kong_service_verify_idemia_service(idemia_service):
+    assert pytest.json_response.status_code == 200
