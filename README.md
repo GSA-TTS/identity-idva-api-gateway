@@ -1,3 +1,4 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
 # GSA GIVE API Gateway
 
 ### Pre-requisites
