@@ -2,14 +2,13 @@
 # GSA GIVE API Gateway
 
 ### Pre-requisites
-- [Git Bash](https://git-scm.com/downloads)
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
 - [Python 3.9](https://www.python.org/downloads/release/python-390/#:~:text=Files%20%20%20%20Version%20%20%20,%20%208757017%20%206%20more%20rows)
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
 
 ### Initial Setup
 
-Follow the directions outlined in [Cloud.gov CLI Setup](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
+Follow the directions outlined in [Cloud.gov CLI Setup](https://docs.cloudfoundry.org/cf-cli/)
 
 Setup a database layer for the API Gateway by running:
 
@@ -17,9 +16,7 @@ Setup a database layer for the API Gateway by running:
 cf create-service aws-rds micro-psql kong-db
 ```
 
-For more info about database service plans see 
-- [Relational databases (RDS)](https://cloud.gov/docs/services/relational-database/)
-- [Cloud.gov > Marketplace > Relational databases > Plans](https://dashboard.fr.cloud.gov/marketplace/2oBn9LBurIXUNpfmtZCQTCHnxUM/dcfb1d43-f22c-42d3-962c-7ae04eda24e7/plans)
+For more info about database service plans see the [cloud.gov Relational databases (RDS)](https://cloud.gov/docs/services/relational-database/) page.
 
 To setup the API Gateway run:
 
@@ -55,7 +52,7 @@ The GIVE API Gateway is deployed with a Kong OAuth 2.0 authorization plugin with
 
 ### Troubleshooting
 
-Since this is not a compiled application, there isn't any debugging involved. You can set the [log level](https://docs.konghq.com/2.1.x/logging/) in the [manifest.yml](/manifest.yml) file and the view the logs in the Cloud.gov application dashboard under **Log Stream**.
+You can set the [log level](https://docs.konghq.com/2.1.x/logging/) in the [manifest.yml](/manifest.yml) file and the view the logs in the Cloud.gov application dashboard under **Log Stream**.
 
 Alternatively, you can use:
 
