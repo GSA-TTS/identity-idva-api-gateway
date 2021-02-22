@@ -1,0 +1,31 @@
+---
+# This workflow will install Python dependencies and run tests
+
+name: Deploy-Dev
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.repository_owner == '18F'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install CloudFoundry CLI
+        run: |
+          brew install cloudfoundry/tap/cf-cli@7
+          cf --version
+
+      - name: Setup CF CLI auth and target environment
+        run: |
+          cf api https://api.fr.cloud.gov
+          cf auth ${{ secrets.CF_USERNAME }} ${{ secrets.CF_PASSWORD }}
+          cf target -o ${{ secrets.CF_ORG }} -s give-dev
+
+      - name: Deploy application
+        run: |
+          cf push --vars-file vars.yaml
