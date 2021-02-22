@@ -4,7 +4,16 @@ The Government Identity Verification Engine (GIVE) API gateway uses [Kong Gatewa
 to provide authentication and access to the rest of GIVE's microservices. GIVE uses a microservices architecture,
 and the API gateway serves as the entrypoint to those microservices.
 
+## Why this project
+The GIVE API Gateway aims to provide secure, unified access to GIVE microservices. Without the gateway, GIVE would
+be a segmented collection of related APIs, which sounds much less useful than a unified API providing identity 
+validation services. The API Gateway has the following goals:
+* Secure access to GIVE services
+* Provide a single entrypoint to GIVE services
+* Manage inbound/outbound traffic
+
 ## Pre-requisites
+If you plan to develop a new feature or add new code to this repo, you'll need the following:
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
 
@@ -92,3 +101,11 @@ curl -X POST https://give-api-gateway/ipp/oauth2/token \
 to the local instance as the OAuth plugin will not allow http. By default the docker-compose method has this set up using a
 self-signed cert, so local requests can accept use of self-signed certs and be reasonably confident their environment is consistent
 with what will be actually deployed.
+
+## Public domain
+
+This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
+
+> This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+>
+> All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
