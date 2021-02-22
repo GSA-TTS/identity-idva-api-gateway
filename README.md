@@ -1,67 +1,99 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
 # GSA GIVE API Gateway
+The GIVE API gateway uses [Kong Gateway (OSS)](https://docs.konghq.com/gateway-oss/) to provide
+authentication and access to the rest of GIVE's microservices and is deployed in cloud.gov.
 
-### Pre-requisites
+## Pre-requisites
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
-- [Python 3.9](https://www.python.org/downloads/release/python-390/#:~:text=Files%20%20%20%20Version%20%20%20,%20%208757017%20%206%20more%20rows)
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
 
-### Initial Setup
+## Development Setup
+You can test out kong features and configurations locally using the Local Development steps, and
+use the Cloud.gov Development steps when you're ready to test in cloud.gov.
 
-Follow the directions outlined in [Cloud.gov CLI Setup](https://docs.cloudfoundry.org/cf-cli/)
+Note: You will need to set up consumers and credentials within your test instances. See the
+[OAuth2.0 section](#OAuth-2.0-Authorization) section for details on how to set this up.
 
-Setup a database layer for the API Gateway by running:
+### Local Development
+Local Kong development can be done by:
+1. Installing Kong via the [Docker Installation](https://docs.konghq.com/install/docker/) method.
+This is our preferred method, but you _can_ use one of the other [Kong's supported install methods](https://konghq.com/install/)).
+    * The [Kong Docker-compose](https://github.com/Kong/docker-kong/tree/master/compose) template
+    makes setting up the Kong docker install even easier. You can have Kong and a local postgres
+    container running by simply running `docker-compose up`.
 
+2. Sync the current GIVE configuration to your local Kong instance. GIVE uses the
+[Kong decK CLI tool](https://docs.konghq.com/deck/overview/) to manage our Kong configuration as code,
+so syncing the configuration should be as simple as running `deck sync --skip-consumers`.
+
+### Cloud.gov Development
+To run a dev instance of the Kong service in cloud.gov, use the following steps:
+
+1. Create a database to connect your Kong instance to during development (Don't use the one other
+dev services are relying on being semi-stable!)
+    * Use `cf create-service aws-rds micro-psql <your-test-db-name>` to start the DB creation process in cloud.gov
+    * Wait for the DB to complete creating. You can use `watch -n 10 cf service <your-test-db-name>`
+    and wait for the `status` to be `create succeeded`.
+
+2. Modify the [manifest.yml](manifest.yml) file so that deployments don't step on other's dev instances by changing:
+    * The entire `routes` section to just `random-route: true`
+    * The `give-api-gateway-data` service in the `services` with your DB service name from step 1.
+
+3. Push your dev instance to cloud.gov by running `cf push --vars-file vars.yaml`.
+
+## Admin API Access
+
+To access the Kong Admin API, you can set up SSH connections the app as shown below:
+
+```shell
+# Typical SSH access
+cf ssh <app-name>
+
+# Or to set up an SSH tunnel
+cf ssh -N -T -L 8081:localhost:8081 <app-name>
 ```
-cf create-service aws-rds micro-psql kong-db
+
+Note that 8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port.
+
+
+## OAuth 2.0 Authorization
+
+The GIVE API Gateway is deployed with a Kong [OAuth 2.0 authorization plugin](https://docs.konghq.com/hub/kong-inc/oauth2/)
+with [Client Credentials Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.4) enabled that all requests must follow.
+
+### Setting up a new consumer
+If you have a development instance running, you can add a new Kong Consumer and OAuth credentials by running:
+```shell
+# This request will return an "id" that is needed for the next request.
+curl -X POST http://localhost:8081/consumers/ \
+    --data "username=<your-username"
+
+# This request will return the client_id and client_secret to generate OAuth tokens with
+curl -X POST http://localhost:8081/consumers/<id-from-first-curl-response>/oauth2 \
+    --data "name=Global%20OAuth%20Application" \
 ```
 
-For more info about database service plans see the [cloud.gov Relational databases (RDS)](https://cloud.gov/docs/services/relational-database/) page.
+### Generating tokens
+Making requests to GIVE endpoints before this point will result in an error message similar to "The access token is missing".
+In order to generate an access token, make a POST request to https://<give-api-gateway>/<service>/oauth2/token, and include
+the client_id, client_secret, grant_type, and scope in the body of the request.
 
-To setup the API Gateway run:
-
+A request to a fictional "cool-service" endpoint would look like this:
 ```
-cf push <your-gateway-name>
-```
-This creates a new API Gateway application in your sandbox environment with the the endpoint: https://your-gateway-name.app.cloud.gov. 
-
-You can visit the [Cloud.gov Dashboard](https://dashboard.fr.cloud.gov/applications) to view the status of the deployment.
-
-### Continued Deployment
-
-There is no CI/CD in place yet for the continued deployment of the Kong api gateway microservice. To manually deploy, set up a python virtual environment and run:
-
-```
-./deploy.sh
+curl -X POST https://give-api-gateway/ipp/oauth2/token \
+    --data "grant_type=client_credentials" \
+    --data "scope=rpname" \
+    --data "client_id=client_id_from_earlier" \
+    --data "client_secret=client_secret_from_earlier"
 ```
 
-### Admin API Access
-
-In order to access the Kong Admin API, an SSH tunnel must be set up. Run:
-
-```
-cf ssh -N -T -L 8081:localhost:8081 give-api-gateway
-```
-
-_8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. This is due to Cloud Foundry restricting 8080 as the default port_
-
-
-### OAuth 2.0 Authorization
-
-The GIVE API Gateway is deployed with a Kong OAuth 2.0 authorization plugin with Client Credentials Grant enabled. All requests must follow the [Client Credentials Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.4).
-
-### Troubleshooting
-
-You can set the [log level](https://docs.konghq.com/2.1.x/logging/) in the [manifest.yml](/manifest.yml) file and the view the logs in the Cloud.gov application dashboard under **Log Stream**.
-
-Alternatively, you can use:
-
-```
-cf logs <your-gateway-name>
-```
-to tail the logs. Include `--recent` if you want to just dump the logs instead.
+:warning: If you set up your development environment using the docker-compose method, make sure you're using https to connect
+to the local instance as the OAuth plugin will not allow http. By default the docker-compose method has this set up using a
+self-signed cert, so local requests can accept use of self-signed certs and be reasonably confident their environment is consistent
+with what will be actually deployed.
 
 ### References
 - [cloud-gov/cf-kong](https://github.com/cloud-gov/cf-kong)
 - [Kong Quickstart](https://docs.konghq.com/2.1.x/getting-started/quickstart/)
 - [Kong Configuration Reference](https://docs.konghq.com/2.1.x/configuration/)
+- [Kong OAuth Plugin](https://docs.konghq.com/hub/kong-inc/oauth2/)
