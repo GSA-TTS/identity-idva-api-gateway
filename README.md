@@ -1,4 +1,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
+
 # GIVE API Gateway
 The Government Identity Verification Engine (GIVE) API gateway uses [Kong Gateway (OSS)](https://docs.konghq.com/gateway-oss/)
 to provide authentication and access to the rest of GIVE's microservices. GIVE uses a microservices architecture,
