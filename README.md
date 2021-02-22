@@ -20,16 +20,16 @@ If you plan to develop a new feature or add new code to this repo, you'll need t
 - Cloud.gov account (Contact [Will Shah](mailto:wshah@easydynamics.com?subject=GSA%20Cloud.gov%20Account) to get one).
 
 ## Development Setup
-You can test out kong features and configurations locally using the Local Development steps, and
-use the Cloud.gov Development steps when you're ready to test in cloud.gov.
+You can test out kong features and configurations locally using the [local Development steps](#Local-Development), and
+use the [Cloud.gov development steps](#Cloud.gov-Development) when you're ready to test in cloud.gov.
 
-Note: You will need to set up consumers and credentials within your test instances. See the
+:bulb: Note: You will need to set up consumers and credentials within your test instances. See the
 [OAuth2.0 section](#OAuth-2.0-Authorization) section for details on how to set this up.
 
 ### Local Development
 Local Kong development can be done by:
 1. Installing Kong via the [Docker Installation](https://docs.konghq.com/install/docker/) method.
-This is our preferred method, but you _can_ use one of the other [Kong's supported install methods](https://konghq.com/install/)).
+This is our preferred method, but you _can_ use one of the other [Kong's supported install methods](https://konghq.com/install/).
     * The [Kong Docker-compose](https://github.com/Kong/docker-kong/tree/master/compose) template
     makes setting up the Kong docker install even easier. You can have Kong and a local postgres
     container running by simply running `docker-compose up`.
@@ -65,8 +65,10 @@ cf ssh <app-name>
 cf ssh -N -T -L 8081:localhost:8081 <app-name>
 ```
 
-Note that 8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port.
-
+*8081* is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. See the
+[Kong Admin API Documentation](https://docs.konghq.com/gateway-oss/2.3.x/admin-api/) for details on usage. Since GIVE
+manages the Kong configuration with [decK](https://docs.konghq.com/deck/overview/), see about using the [config file](kong.yaml)
+file to make changes before relying on the admin API directly.
 
 ## OAuth 2.0 Authorization
 
