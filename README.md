@@ -91,9 +91,3 @@ curl -X POST https://give-api-gateway/ipp/oauth2/token \
 to the local instance as the OAuth plugin will not allow http. By default the docker-compose method has this set up using a
 self-signed cert, so local requests can accept use of self-signed certs and be reasonably confident their environment is consistent
 with what will be actually deployed.
-
-### References
-- [cloud-gov/cf-kong](https://github.com/cloud-gov/cf-kong)
-- [Kong Quickstart](https://docs.konghq.com/2.1.x/getting-started/quickstart/)
-- [Kong Configuration Reference](https://docs.konghq.com/2.1.x/configuration/)
-- [Kong OAuth Plugin](https://docs.konghq.com/hub/kong-inc/oauth2/)
