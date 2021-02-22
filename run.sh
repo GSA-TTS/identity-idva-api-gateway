@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Make location of libs configurable
 LOCAL='/home/vcap/deps/0/apt/usr/local'
@@ -20,11 +21,38 @@ export KONG_PG_DATABASE=`echo $VCAP_SERVICES | jq -r '.["'$SERVICE'"][0].credent
 export KONG_LUA_PACKAGE_PATH=$LUA_PATH
 export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
-# Start kong
-kong migrations up
-kong start --vv
+# Run bootstrap/migration commands that should only be run by one Kong node
+if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
+    # Bootstrap the kong database and runs migrations. If the database is already bootstrapped, does nothing.
+    kong migrations bootstrap
+fi
 
-# Keep this process alive
+# Start the main Kong application.
+kong start --v
+
+# Perform configuration sync (only one Kong node should run this)
+if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
+    # Only install deck if it's not already installed. Prevents re-downloading binary on application restarts.
+    if [ ! -f "./deck" ]; then
+        echo "Starting decK install"
+        curl --silent --location https://github.com/kong/deck/releases/download/v1.3.0/deck_1.3.0_linux_amd64.tar.gz --output deck.tar.gz
+        tar --extract --file=deck.tar.gz
+        echo "Deck install complete. Deck version $(./deck version)"
+    fi
+
+    KONG_ADDR="http://localhost:8081"
+
+    # Ensure we can connect to the kong instance
+    ./deck ping --kong-addr $KONG_ADDR
+
+    # Run a diff to log what changes are being made
+    ./deck diff --kong-addr $KONG_ADDR --skip-consumers
+
+    # Synchronize changes
+    ./deck sync --kong-addr $KONG_ADDR --skip-consumers
+fi
+
+# Keep this shell process alive. If it exits, it will cause cloudfoundry to try to restart the instance.
 while true;do
 	sleep 10
 	nginx_count=`ps aux | grep maste[r] | wc -l`

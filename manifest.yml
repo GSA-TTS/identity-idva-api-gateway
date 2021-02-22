@@ -1,26 +1,26 @@
 ---
 applications:
-- name: give-api-gateway
-  stack: cflinuxfs3
-  instances: ((instances))
-  memory: ((memory))
-  buildpacks: 
-    - https://github.com/cloudfoundry/apt-buildpack
-    - https://github.com/cloudfoundry/binary-buildpack
-  command: ./run.sh
-  services:
-    - give-api-gateway-data  
-  routes:
-    - route: give-((environment)).app.cloud.gov
-  env:
-    KONG_DATABASE: postgres
-    KONG_PROXY_LISTEN: 0.0.0.0:8080
-    KONG_ADMIN_LISTEN: 0.0.0.0:8081
-    KONG_DB_UPDATE_FREQUENCY: 3
-    KONG_DB_UPDATE_PROPAGATION: 1
-    KONG_LOG_LEVEL: notice
-    KONG_PROXY_ACCESS_LOG: /dev/stdout
-    KONG_ADMIN_ACCESS_LOG: /dev/stdout
-    KONG_PROXY_ERROR_LOG: /dev/stderr
-    KONG_ADMIN_ERROR_LOG: /dev/stderr
-    KONG_TRUSTED_IPS: 0.0.0.0/0
+  - name: give-api-gateway
+    stack: cflinuxfs3
+    instances: ((instances))
+    memory: ((memory))
+    buildpacks:
+      - https://github.com/cloudfoundry/apt-buildpack
+      - https://github.com/cloudfoundry/binary-buildpack
+    command: ./run.sh
+    services:
+      - give-api-gateway-data
+    routes:
+      - route: give-((environment)).app.cloud.gov
+    env:
+      KONG_DATABASE: postgres
+      KONG_PROXY_LISTEN: 0.0.0.0:8080
+      KONG_ADMIN_LISTEN: 0.0.0.0:8081
+      KONG_DB_UPDATE_FREQUENCY: 3
+      KONG_DB_UPDATE_PROPAGATION: 1
+      KONG_LOG_LEVEL: notice
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_TRUSTED_IPS: 0.0.0.0/0
