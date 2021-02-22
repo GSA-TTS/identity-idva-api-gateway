@@ -55,7 +55,11 @@ dev services are relying on being semi-stable!)
 
 ## Admin API Access
 
-To access the Kong Admin API, you can set up SSH connections the app as shown below:
+:warning: Since GIVE manages the Kong configuration with [decK](https://docs.konghq.com/deck/overview/), see about using the
+[config file](kong.yaml) file to make changes before relying on the admin API directly. decK practices configuration-as-code
+and will interact with the admin API on your behalf. Only rely on the admin api if you *absolutely* have to.
+
+If you still need direct access the Kong Admin API in cloud.gov, you can set up SSH connections the app as shown below:
 
 ```shell
 # Typical SSH access
@@ -65,10 +69,10 @@ cf ssh <app-name>
 cf ssh -N -T -L 8081:localhost:8081 <app-name>
 ```
 
-*8081* is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. See the
-[Kong Admin API Documentation](https://docs.konghq.com/gateway-oss/2.3.x/admin-api/) for details on usage. Since GIVE
-manages the Kong configuration with [decK](https://docs.konghq.com/deck/overview/), see about using the [config file](kong.yaml)
-file to make changes before relying on the admin API directly.
+See the [Kong Admin API Documentation](https://docs.konghq.com/gateway-oss/2.3.x/admin-api/) for details on usage.
+
+:bulb: 8081 is set as the Admin API port in [manifest.yml](manifest.yml), along with 8080 as the proxy port. These ports
+may vary during local development depending on your settings, but will be 8080/8081 within cloud.gov.
 
 ## OAuth 2.0 Authorization
 
