@@ -1,7 +1,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
-# GSA GIVE API Gateway
-The GIVE API gateway uses [Kong Gateway (OSS)](https://docs.konghq.com/gateway-oss/) to provide
-authentication and access to the rest of GIVE's microservices and is deployed in cloud.gov.
+# GIVE API Gateway
+The Government Identity Verification Engine (GIVE) API gateway uses [Kong Gateway (OSS)](https://docs.konghq.com/gateway-oss/)
+to provide authentication and access to the rest of GIVE's microservices. GIVE uses a microservices architecture,
+and the API gateway serves as the entrypoint to those microservices.
 
 ## Pre-requisites
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
