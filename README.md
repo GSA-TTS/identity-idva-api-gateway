@@ -66,11 +66,11 @@ If you have a development instance running, you can add a new Kong Consumer and 
 ```shell
 # This request will return an "id" that is needed for the next request.
 curl -X POST http://localhost:8081/consumers/ \
-    --data "username=<your-username"
+    --data "username=<your-username>"
 
 # This request will return the client_id and client_secret to generate OAuth tokens with
 curl -X POST http://localhost:8081/consumers/<id-from-first-curl-response>/oauth2 \
-    --data "name=Global%20OAuth%20Application" \
+    --data "name=Global%20OAuth%20Application"
 ```
 
 ### Generating tokens
