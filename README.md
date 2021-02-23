@@ -86,6 +86,7 @@ may vary during local development depending on your settings, but will be 8080/8
 
 The GIVE API Gateway is deployed with a Kong [OAuth 2.0 authorization plugin](https://docs.konghq.com/hub/kong-inc/oauth2/)
 with [Client Credentials Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.4) enabled that all requests must follow.
+It should not be possible for any API endpoint to be accessed without first going through the OAuth2.0 plugin.
 
 ### Setting up a new consumer
 If you have a development instance running, you can add a new Kong Consumer and OAuth credentials by running:
@@ -117,6 +118,15 @@ curl -X POST https://give-api-gateway/ipp/oauth2/token \
 to the local instance as the OAuth plugin will not allow http. By default the docker-compose method has this set up using a
 self-signed cert, so local requests can accept use of self-signed certs and be reasonably confident their environment is consistent
 with what will be actually deployed.
+
+## Changing the Kong Configuration
+Configuration changes can be made by changing the [kong.yaml](kong.yaml) configuration file, and syncing those changes with decK.
+This should be done locally to ensure correctness, and validated using the `deck validate` command.
+
+It may occasionally be necessary to make changes directly to the Kong admin API and export that configuration to inspect the format
+that decK expects configuration to be in. See the [decK dump command](https://docs.konghq.com/deck/commands/#dump).
+
+:bulb: New services added to Kong should automatically be secured with the global OAuth2.0 plugin.
 
 ## Public domain
 
