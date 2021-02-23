@@ -14,6 +14,10 @@ validation services. The API Gateway has the following goals:
 * Provide a single entrypoint to GIVE services
 * Manage inbound/outbound traffic
 
+## CI/CD Workflows with GitHub Actions
+The most up-to-date information about the CI/CD flows for this repo can be found in the
+[GitHub workflows directory](https://github.com/18F/identity-give-gateway-service/tree/main/.github/workflows)
+
 ## Pre-requisites
 If you plan to develop a new feature or add new code to this repo, you'll need the following:
 - [CF CLI](https://easydynamics.atlassian.net/wiki/spaces/GSATTS/pages/1252032607/Cloud.gov+CF+CLI+Setup)
