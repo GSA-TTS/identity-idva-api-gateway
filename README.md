@@ -66,6 +66,10 @@ and will interact with the admin API on your behalf. Only rely on the admin api 
 If you still need direct access the Kong Admin API in cloud.gov, you can set up SSH connections the app as shown below:
 
 ```shell
+# To enable/disable SSH access (also see https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html
+cf enable-ssh <app-name>
+cf disable-ssh <app-name>
+
 # Typical SSH access
 cf ssh <app-name>
 
