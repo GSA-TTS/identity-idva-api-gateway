@@ -4,9 +4,10 @@
 name: Deploy-Dev
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Validate-Config"]
+    branches: [main]
+    types: [completed]
 
 jobs:
   deploy:

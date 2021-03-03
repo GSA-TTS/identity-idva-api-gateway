@@ -2,7 +2,8 @@
 
 ## Deploy Dev
 Deploys the project to the GIVE dev environment within Cloud.gov. The
-deploy-dev workflow will only be triggered in the 18F repository. This will
+deploy-dev workflow will only be triggered if the Validate-Config workflow has
+completed successfully and will only run in the 18F repository. This will
 prevent forks from needlessly running workflows that will always fail
 (forks won't be able to authenticate into the dev environment).
 
