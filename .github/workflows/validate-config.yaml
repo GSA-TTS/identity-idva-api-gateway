@@ -1,0 +1,26 @@
+---
+# This workflow will validate the Kong decK configuration file
+
+name: Validate-Config
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install decK CLI
+        run: |
+          brew tap kong/deck
+          brew install deck
+          deck version
+
+      - name: Validate the Kong config file
+        run: |
+          deck validate
