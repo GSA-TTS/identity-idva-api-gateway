@@ -9,7 +9,7 @@ on:
       - main
   pull_request:
     # Only run the config validation if the config file has changed in a pull
-    # requests. Don't add this to the push->branches->main section, as we still
+    # request. Don't add this to the push->branches->main section, as we still
     # want pushes to the main branch to trigger a deployment whether the config
     # changed or not.
     paths:
