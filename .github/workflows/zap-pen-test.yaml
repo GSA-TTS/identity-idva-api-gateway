@@ -1,0 +1,14 @@
+---
+# This workflow will run a series of penetration tests against the GIVE API Gateway
+
+on: [pull_request]
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the API Gateway
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: "https://give-dev.app.cloud.gov"
