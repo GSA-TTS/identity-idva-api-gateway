@@ -1,12 +1,13 @@
 ---
 # This workflow will run a series of penetration tests against the GIVE API Gateway
 
+name: Zap-Scan
+
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'  # All markdown files in the repository
+  workflow_run:
+    workflows: ["Deploy-Dev"]
+    branches: [main]
+    types: [completed]
 
 jobs:
   zap_scan:
