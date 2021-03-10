@@ -1,0 +1,19 @@
+---
+# This workflow will run a series of penetration tests against the GIVE API Gateway
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'  # All markdown files in the repository
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the API Gateway
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: "https://give-dev.app.cloud.gov"
