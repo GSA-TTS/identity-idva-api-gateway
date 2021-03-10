@@ -1,7 +1,7 @@
 ---
 # This workflow will run a series of penetration tests against the GIVE API Gateway
 
-name: Zap-Pen-Test
+name: Zap-Scan
 
 on:
   workflow_run:
