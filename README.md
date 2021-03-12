@@ -67,7 +67,7 @@ use the one other dev services are relying on being semi-stable!)
 2. Modify the [manifest.yml](manifest.yml) file so that deployments don't step
 on other's dev instances by changing:
     * The entire `routes` section to just `random-route: true`
-    * The `give-api-gateway-data` service in the `services` with your DB
+    * The `api-gateway-db` service in the `services` with your DB
     service name from step 1.
 
 3. Push your dev instance to cloud.gov by running `cf push --vars-file vars.yaml`.
@@ -127,12 +127,12 @@ curl -X POST http://localhost:8081/consumers/<id-from-first-curl-response>/oauth
 Making requests to GIVE endpoints before this point will result in an error
 message similar to "The access token is missing". In order to generate an
 access token, make a POST request to
-https://<give-api-gateway>/<service>/oauth2/token, and include the client_id,
+https://<api-gateway>/<service>/oauth2/token, and include the client_id,
 client_secret, grant_type, and scope in the body of the request.
 
 A request to a fictional "cool-service" endpoint would look like this:
 ```
-curl -X POST https://give-api-gateway/ipp/oauth2/token \
+curl -X POST https://api-gateway/cool-service/oauth2/token \
     --data "grant_type=client_credentials" \
     --data "scope=rpname" \
     --data "client_id=client_id_from_earlier" \
