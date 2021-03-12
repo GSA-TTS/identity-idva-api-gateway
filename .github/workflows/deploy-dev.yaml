@@ -27,10 +27,10 @@ jobs:
           cf auth ${{ secrets.CF_USERNAME }} ${{ secrets.CF_PASSWORD }}
           cf target -o ${{ secrets.CF_ORG }} -s give-dev
 
-      - name: Apply CF Network Policies
-        run: |
-          cf add-network-policy give-api-gateway ipp-idemia
-
       - name: Deploy application
         run: |
           cf push --vars-file vars.yaml
+
+      - name: Apply CF Network Policies
+        run: |
+          cf add-network-policy give-api-gateway ipp-idemia
