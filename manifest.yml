@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: give-api-gateway
+  - name: api-gateway
     stack: cflinuxfs3
     instances: ((instances))
     memory: ((memory))
@@ -9,7 +9,7 @@ applications:
       - https://github.com/cloudfoundry/binary-buildpack
     command: ./run.sh
     services:
-      - give-api-gateway-data
+      - api-gateway-db
     routes:
       - route: give-((environment)).app.cloud.gov
     env:
