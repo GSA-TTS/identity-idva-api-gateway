@@ -18,7 +18,7 @@ jobs:
 
       - name: Install CloudFoundry CLI
         run: |
-          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v7&source=github" | tar -zx --directory=/usr/local/bin
+          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v7&source=github" | sudo tar -zx --directory=/usr/local/bin
           cf --version
 
       - name: Setup CF CLI auth and target environment
