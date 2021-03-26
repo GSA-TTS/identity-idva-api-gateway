@@ -4,14 +4,35 @@
 name: Deploy-Dev
 
 on:
-  workflow_run:
-    workflows: ["Validate-Config"]
-    branches: [main]
-    types: [completed]
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+    paths-ignore:
+      - '**.md'  # All markdown files in the repository
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install decK CLI
+        run: |
+          brew tap kong/deck
+          brew install deck
+          deck version
+
+      - name: Validate the Kong config file
+        run: |
+          deck validate --state kong-dev.yaml
+          deck validate --state kong-test.yaml
+          deck validate --state kong-prod.yaml
+
   deploy:
     if: github.repository_owner == '18F'
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
