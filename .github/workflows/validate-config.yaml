@@ -18,7 +18,7 @@ on:
       - 'kong.yaml'
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
