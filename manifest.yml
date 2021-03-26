@@ -2,16 +2,16 @@
 applications:
   - name: api-gateway
     stack: cflinuxfs3
-    instances: ((instances))
-    memory: ((memory))
+    instances: ((INSTANCES))
+    memory: ((MEMORY))
     buildpacks:
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
-    command: ./run.sh
+    command: ./run.sh ((ENVIRONMENT_NAME))
     services:
       - api-gateway-db
     routes:
-      - route: give-((environment)).app.cloud.gov
+      - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
     env:
       KONG_DATABASE: postgres
       KONG_PROXY_LISTEN: 0.0.0.0:8080

@@ -1,4 +1,3 @@
 ---
-environment: dev
-instances: 1
-memory: 512M
+INSTANCES: 1
+MEMORY: 512M

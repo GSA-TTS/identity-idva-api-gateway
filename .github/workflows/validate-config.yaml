@@ -4,11 +4,6 @@
 name: Validate-Config
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'  # All markdown files in the repository
   pull_request:
     # Only run the config validation if the config file has changed in a pull
     # request. Don't add this to the push->branches->main section, as we still
@@ -18,7 +13,7 @@ on:
       - 'kong.yaml'
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,4 +26,6 @@ jobs:
 
       - name: Validate the Kong config file
         run: |
-          deck validate
+          deck validate --state kong-dev.yaml
+          deck validate --state kong-test.yaml
+          deck validate --state kong-prod.yaml
