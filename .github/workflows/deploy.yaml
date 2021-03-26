@@ -1,7 +1,8 @@
 ---
-# This workflow will install Python dependencies and run tests
+# This workflow will validate the Kong decK state file and deploy
+# the application to a target environment
 
-name: Deploy-Dev
+name: Deploy
 
 on:
   push:
