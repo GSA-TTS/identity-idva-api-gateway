@@ -16,6 +16,8 @@ else
     exit 1
 fi
 
+echo "Kong state file - $deck_file"
+
 # Make location of libs configurable
 LOCAL='/home/vcap/deps/0/apt/usr/local'
 
@@ -61,7 +63,7 @@ if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
     ./deck ping --kong-addr $KONG_ADDR
 
     # Run a diff to log what changes are being made
-    ./deck diff --kong-addr $KONG_ADDR --skip-consumers
+    ./deck diff --kong-addr $KONG_ADDR --skip-consumers --state $deck_file
 
     # Synchronize changes
     ./deck sync --kong-addr $KONG_ADDR --skip-consumers --state $deck_file
