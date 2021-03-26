@@ -5,7 +5,7 @@ name: Zap-Scan
 
 on:
   workflow_run:
-    workflows: ["Deploy-Dev"]
+    workflows: ["Deploy"]
     branches: [main]
     types: [completed]
 
