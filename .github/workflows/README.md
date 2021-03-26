@@ -1,6 +1,6 @@
 # GitHub Actions CI/CD workflows
 
-## Deploy Dev
+## Deploy
 Deploys the project to the correc GIVE environment within Cloud.gov. The
 deploy workflow will only be triggered if the validate job within the flow has
 completed successfully and will only run in the 18F repository. This will
