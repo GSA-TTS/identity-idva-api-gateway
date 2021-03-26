@@ -64,7 +64,7 @@ if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
     ./deck diff --kong-addr $KONG_ADDR --skip-consumers
 
     # Synchronize changes
-    ./deck sync --kong-addr $KONG_ADDR --skip-consumers --state $1
+    ./deck sync --kong-addr $KONG_ADDR --skip-consumers --state $deck_file
 fi
 
 # Keep this shell process alive. If it exits, it will cause cloudfoundry to try to restart the instance.
