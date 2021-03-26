@@ -2,7 +2,7 @@
 _format_version: "1.1"
 services:
   - connect_timeout: 60000
-    url: http://identity-give-ipp.apps.internal:8080
+    url: http://identity-give-ipp-test.apps.internal:8080
     name: idemia-microservice
     read_timeout: 60000
     retries: 5
