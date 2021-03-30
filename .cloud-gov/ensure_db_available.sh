@@ -33,7 +33,7 @@ create_db() {
 }
 
 # Test if DB service exists at all
-cf services | grep --silent $db_name
+cf services | grep --silent "^$db_name "
 
 if [ $? -eq 1 ]; then
     echo "Unable to find database service: $db_name. Creating..."
