@@ -1,22 +1,23 @@
 import argparse, requests
 
+url = "http://localhost:8081/consumers/"
+
 def check_alphanumeric(value):
     if not value.isalnum():
-        raise argparse.ArgumentTypeError("%s is a valid alphanumeric string" % value)
+        raise argparse.ArgumentTypeError("%s is not a valid alphanumeric string." % value)
     return value
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create Kong Consumer')
     parser = argparse.ArgumentParser()
-    parser.add_argument('-u', '--username', required=True)
-    parser.add_argument('-i', '--id', type=check_alphanumeric, required=True)
+    parser.add_argument('--username', required=True)
+    parser.add_argument('--id', type=check_alphanumeric, required=True)
     args = parser.parse_args()
     
     user_data = {
         "username": args.username,
         "custom_id": args.id
     }
-    url = "http://localhost:8081/consumers/"
     oauth_data = {
         "name": "oauth2"
     }
