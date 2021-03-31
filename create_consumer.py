@@ -13,34 +13,19 @@ if __name__ == '__main__':
     parser.add_argument('--username', required=True)
     parser.add_argument('--id', type=check_alphanumeric, required=True)
     args = parser.parse_args()
-    
-    user_data = {
-        "username": args.username,
-        "custom_id": args.id
-    }
-    oauth_data = {
-        "name": "oauth2"
-    }
 
     # create consumer
-    r = requests.post(url, data = user_data)
-    if (r.status_code != 201):
-        raise SystemError("Error creating consumer.")
+    response = requests.post(url, data = {"username": args.username, "custom_id": args.id})
+    response.raise_for_status()
     print("Kong consumer successfully created.")
 
     # generate credentials
-    r = requests.post(url + args.username + "/oauth2", data = oauth_data)
-    if (r.status_code != 201):
-        print("Error creating credentials. Deleting consumer...")
-        # try to delete consumer
-        r = requests.delete(url + args.username)
-        if (r.status_code != 204):
-            raise SystemError("Error deleting consumer. Admin invervention required.")
-        raise SystemError("Error creating credentials. Consumer deleted.")
+    response = requests.post(url + args.username + "/oauth2", data = {"name": "oauth2"})
+    response.raise_for_status()
     
     # consumer creation successful
     # credential distribution
-    json_response = r.json()
+    json_response = response.json()
     print("GIVE credentials generatated, please store in safe location:")
     print("client_id: ", json_response["client_id"])
     print("client_secret: ", json_response["client_secret"])
