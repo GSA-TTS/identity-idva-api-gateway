@@ -84,3 +84,4 @@ jobs:
       - name: Apply CF Network Policies
         run: |
           cf add-network-policy api-gateway idemia
+          cf add-network-policy api-gateway usps
