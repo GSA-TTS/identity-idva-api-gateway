@@ -32,6 +32,7 @@ services:
       - name: usps-route
         methods:
           - GET
+          - POST
         paths:
           - /usps
         path_handling: v0
