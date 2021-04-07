@@ -45,7 +45,7 @@ if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
 fi
 
 # Start the main Kong application.
-kong start --v
+kong start -c kong.conf --v
 
 # Perform configuration sync (only one Kong node should run this)
 if [[ $CF_INSTANCE_INDEX -eq 0 ]]; then
