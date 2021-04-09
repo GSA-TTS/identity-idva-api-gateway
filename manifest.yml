@@ -7,6 +7,7 @@ applications:
     buildpacks:
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
+      - python_buildpack
     command: ./run.sh ((ENVIRONMENT_NAME))
     services:
       - api-gateway-db
