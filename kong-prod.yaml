@@ -23,7 +23,7 @@ services:
         strip_path: true
         https_redirect_status_code: 426
   - connect_timeout: 60000
-    url: http://identity-give-usps-dev.apps.internal:8080
+    url: http://identity-give-usps-prod.apps.internal:8080
     name: usps-microservice
     read_timeout: 60000
     retries: 5
