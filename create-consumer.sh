@@ -1,12 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "--- Kong Conumser Creation Script ---"
-    echo "Required arguments:"
-    printf "\t -u username\n"
-    printf "\t -i id\n"
-    echo "Optional arguments:"
-    printf "\t -h\n"
+    echo "Usage: $0 -u <username> -i <id> [-h]"
     exit 1
 }
 
