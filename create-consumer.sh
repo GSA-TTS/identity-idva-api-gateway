@@ -19,7 +19,10 @@ while getopts hu:i: arg; do
     esac
 done
 
-[[ -z "$USERNAME" || -z "$CUSTOMID" ]] && usage
+if [[ -z "$USERNAME" || -z "$CUSTOMID" ]]
+then
+    usage
+fi
 
 echo "Creating Consumer..."
 curl -X POST http://localhost:8081/consumers/ \
@@ -27,5 +30,5 @@ curl -X POST http://localhost:8081/consumers/ \
     --data "custom_id=$CUSTOMID"
 
 echo "Generating Credentials..."
-curl -X POST http://localhost:8081/consumers/$USERNAME/oauth2 \
+curl -X POST http://localhost:8081/consumers/"$USERNAME"/oauth2 \
     --data "name=oauth2"
