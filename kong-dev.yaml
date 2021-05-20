@@ -64,3 +64,5 @@ plugins:
     protocols:
       - http
       - https
+
+  - name: prometheus
