@@ -43,27 +43,4 @@ services:
         strip_path: true
         https_redirect_status_code: 426
 plugins:
-  - name: oauth2
-    config:
-      accept_http_if_already_terminated: true
-      anonymous: null
-      auth_header_name: authorization
-      enable_authorization_code: true
-      enable_client_credentials: true
-      enable_implicit_grant: false
-      enable_password_grant: false
-      global_credentials: true
-      hide_credentials: false
-      mandatory_scope: true
-      pkce: lax
-      refresh_token_ttl: 1.2096e+06
-      reuse_refresh_token: false
-      scopes:
-        - rpname
-      token_expiration: 7200
-    enabled: true
-    protocols:
-      - http
-      - https
-
   - name: prometheus
