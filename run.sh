@@ -17,6 +17,7 @@ else
 fi
 
 echo "Kong state file - $deck_file"
+export KONG_DATABASE=off
 export KONG_DECLARATIVE_CONFIG="$deck_file"
 
 # Make location of libs configurable
@@ -34,7 +35,7 @@ export KONG_LUA_PACKAGE_PATH=$LUA_PATH
 export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
 # Start the main Kong application.
-kong start -c kong.conf --v
+kong start -c ./kong.conf --v
 
 # Keep this shell process alive. If it exits, it will cause cloudfoundry to try to restart the instance.
 while true; do
