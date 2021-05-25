@@ -7,7 +7,7 @@ applications:
     buildpacks:
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
-    command: ./run.sh ((ENVIRONMENT_NAME))
+    command: ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
     env:
@@ -20,3 +20,5 @@ applications:
       KONG_PROXY_ERROR_LOG: /dev/stderr
       KONG_ADMIN_ERROR_LOG: /dev/stderr
       KONG_TRUSTED_IPS: 0.0.0.0/0
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: kong-((ENVIRONMENT_NAME)).yaml
