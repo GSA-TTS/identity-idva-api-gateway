@@ -10,6 +10,7 @@ applications:
     command: ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: give-((ENVIRONMENT_NAME)).apps.internal
     env:
       KONG_PROXY_LISTEN: 0.0.0.0:8080
       KONG_ADMIN_LISTEN: 0.0.0.0:8081
