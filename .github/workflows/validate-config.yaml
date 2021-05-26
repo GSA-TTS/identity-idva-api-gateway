@@ -10,9 +10,7 @@ on:
     # want pushes to the main branch to trigger a deployment whether the config
     # changed or not.
     paths:
-      - 'kong-dev.yaml'
-      - 'kong-test.yaml'
-      - 'kong-prod.yaml'
+      - 'kong-config.yaml'
 
 jobs:
   validate:
