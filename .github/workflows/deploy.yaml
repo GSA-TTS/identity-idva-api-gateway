@@ -74,9 +74,6 @@ jobs:
       - name: Set CF CLI Target
         run: cf target -o ${{ secrets.CF_ORG }} -s ${{ steps.deployment-target.outputs.SPACE }}
 
-      - name: Ensure DB Available
-        run: .cloud-gov/ensure_db_available.sh api-gateway-db
-
       - name: Deploy application
         run: cf push --vars-file vars.yaml --var ENVIRONMENT_NAME=${{ steps.deployment-target.outputs.ENVIRONMENT_NAME }}
 
