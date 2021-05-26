@@ -1,25 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ -z "$1" ]; then
-    echo "Usage: $0 dev|test|prod"
-fi
-
-if [[ $1 == "dev" ]]; then
-    deck_file=kong-dev.yaml
-elif [[ $1 == "test" ]]; then
-    deck_file=kong-test.yaml
-elif [[ $1 == "prod" ]]; then
-    deck_file=kong-prod.yaml
-else
-    echo "Usage: $0 dev|test|prod"
-    exit 1
-fi
-
-echo "Kong state file - $deck_file"
-export KONG_DATABASE=off
-export KONG_DECLARATIVE_CONFIG="$deck_file"
-
 # Make location of libs configurable
 LOCAL='/home/vcap/deps/0/apt/usr/local'
 
@@ -38,10 +19,8 @@ export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 kong start -c ./kong.conf --v
 
 # Keep this shell process alive. If it exits, it will cause cloudfoundry to try to restart the instance.
-while true; do
+while kong health > /dev/null; do
   sleep 10
-  if ! pgrep --full "nginx: master process" > /dev/null; then
-    echo "Main Nginx process crashed"
-    exit 1
-  fi
 done
+
+exit 1
