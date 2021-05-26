@@ -9,7 +9,7 @@ applications:
       # without also modifying the run command accordingly.
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
-    command: /home/vcap/deps/0/apt/usr/bin/envsubst < kong-config.yaml > $KONG_DECLARATIVE_CONFIG && ./run.sh
+    command: ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: give-((ENVIRONMENT_NAME)).apps.internal
