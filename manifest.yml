@@ -9,20 +9,9 @@ applications:
       # without also modifying the run command accordingly.
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
-    command: /home/vcap/deps/0/apt/usr/bin/envsubst < kong-config.yaml > $KONG_DECLARATIVE_CONFIG && ./run.sh
+    command: ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: give-((ENVIRONMENT_NAME)).apps.internal
     env:
-      KONG_PROXY_LISTEN: 0.0.0.0:8080
-      KONG_ADMIN_LISTEN: 0.0.0.0:8081
-      KONG_STATUS_LISTEN: 0.0.0.0:8100
-      KONG_LOG_LEVEL: notice
-      KONG_PROXY_ACCESS_LOG: /dev/stdout
-      KONG_ADMIN_ACCESS_LOG: /dev/stdout
-      KONG_PROXY_ERROR_LOG: /dev/stderr
-      KONG_ADMIN_ERROR_LOG: /dev/stderr
-      KONG_TRUSTED_IPS: 0.0.0.0/0
-      KONG_DATABASE: 'off'
-      KONG_DECLARATIVE_CONFIG: /home/vcap/app/kong.yaml
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))

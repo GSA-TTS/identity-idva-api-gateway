@@ -15,6 +15,9 @@ grep -irIl '/usr/local' ../deps/0/apt | xargs sed -i -e "s|/usr/local|$LOCAL|"
 export KONG_LUA_PACKAGE_PATH=$LUA_PATH
 export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
+# Generate the kong.yaml state file
+/home/vcap/deps/0/apt/usr/bin/envsubst < kong-config.yaml > /home/vcap/app/kong.yaml
+
 # Start the main Kong application.
 kong start -c ./kong.conf --v
 
