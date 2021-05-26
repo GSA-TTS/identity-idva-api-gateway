@@ -28,6 +28,6 @@ jobs:
 
       - name: Validate the Kong config file
         run: |
-          deck validate --state kong-dev.yaml
-          deck validate --state kong-test.yaml
-          deck validate --state kong-prod.yaml
+          export ENVIRONMENT_NAME=dev
+          envsubst < kong-config.yaml > kong.yaml
+          deck validate --state kong.yaml
