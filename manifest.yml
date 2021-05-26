@@ -5,9 +5,11 @@ applications:
     instances: ((INSTANCES))
     memory: ((MEMORY))
     buildpacks:
+      # The ordering of these buildpacks matter! Do not change them
+      # without also modifying the run command accordingly.
       - https://github.com/cloudfoundry/apt-buildpack
       - https://github.com/cloudfoundry/binary-buildpack
-    command: envsubst kong_config.yaml > $KONG_DECLARATIVE_CONFIG && ./run.sh
+    command: /home/vcap/deps/0/apt/usr/bin/envsubst < kong-config.yaml > $KONG_DECLARATIVE_CONFIG && ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: give-((ENVIRONMENT_NAME)).apps.internal
@@ -22,5 +24,5 @@ applications:
       KONG_ADMIN_ERROR_LOG: /dev/stderr
       KONG_TRUSTED_IPS: 0.0.0.0/0
       KONG_DATABASE: 'off'
-      KONG_DECLARATIVE_CONFIG: kong.yaml
+      KONG_DECLARATIVE_CONFIG: /home/vcap/app/kong.yaml
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
