@@ -1,0 +1,27 @@
+---
+_format_version: "1.1"
+services:
+  - name: idemia-microservice
+    url: http://identity-give-idemia-${ENVIRONMENT_NAME}.apps.internal:8080
+    routes:
+      - name: idemia-route
+        methods:
+          - GET
+          - POST
+        paths:
+          - /idemia
+        protocols:
+          - http
+  - name: usps-microservice
+    url: http://identity-give-usps-${ENVIRONMENT_NAME}.apps.internal:8080
+    routes:
+      - name: usps-route
+        methods:
+          - GET
+          - POST
+        paths:
+          - /usps
+        protocols:
+          - http
+plugins:
+  - name: prometheus
