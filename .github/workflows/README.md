@@ -14,5 +14,6 @@ marked stale for 5 days, the workflow will close the item.
 
 ## Validate Config
 The validte-config workflow will install the Kong decK tool and run a
-`deck validate` against all current kong deck state files to ensure that
-there are no detectable format errors within the files.
+`deck validate` against the generated kong deck state files to ensure that
+there are no detectable format errors within the files. It will also install
+the kong tool and validate the kong.conf file
