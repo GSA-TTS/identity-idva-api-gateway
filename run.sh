@@ -20,10 +20,3 @@ export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
 # Start the main Kong application.
 kong start -c ./kong.conf --v
-
-# Keep this shell process alive. If it exits, it will cause cloudfoundry to try to restart the instance.
-while kong health > /dev/null; do
-  sleep 10
-done
-
-exit 1
