@@ -8,6 +8,8 @@ services:
         methods:
           - GET
           - POST
+        hosts:
+         - give-${ENVIRONMENT_NAME}.app.cloud.gov
         paths:
           - /idemia
         protocols:
@@ -19,6 +21,8 @@ services:
         methods:
           - GET
           - POST
+        hosts:
+         - give-${ENVIRONMENT_NAME}.app.cloud.gov
         paths:
           - /usps
         protocols:
@@ -29,8 +33,8 @@ services:
       - name: sk-portal-route
         methods:
           - GET
-        paths:
-          - /portal
+        hosts:
+         - give-portal-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
   - name: sk-sdk
@@ -39,8 +43,8 @@ services:
       - name: sk-sdk-route
         methods:
           - GET
-        paths:
-          - /sdk
+        hosts:
+         - give-sdk-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
   - name: sk-api
@@ -50,8 +54,10 @@ services:
         methods:
           - GET
           - POST
-        paths:
-          - /api
+          - PUT
+          - DELETE
+        hosts:
+         - give-api-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
 plugins:

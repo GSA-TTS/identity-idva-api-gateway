@@ -12,6 +12,9 @@ applications:
     command: ./run.sh
     routes:
       - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: give-api-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: give-portal-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: give-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: give-((ENVIRONMENT_NAME)).apps.internal
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
