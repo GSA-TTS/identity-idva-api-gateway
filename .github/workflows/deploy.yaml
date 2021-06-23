@@ -90,3 +90,6 @@ jobs:
         run: |
           cf add-network-policy api-gateway idemia
           cf add-network-policy api-gateway usps
+          cf add-network-policy api-gateway sk-api
+          cf add-network-policy api-gateway sk-portal
+          cf add-network-policy api-gateway sk-sdk
