@@ -30,6 +30,7 @@ services:
           - POST
           - PUT
           - DELETE
+          - OPTIONS
         hosts:
          - give-api-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
