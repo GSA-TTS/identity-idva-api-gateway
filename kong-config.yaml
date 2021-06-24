@@ -1,32 +1,6 @@
 ---
 _format_version: "1.1"
 services:
-  - name: idemia-microservice
-    url: http://identity-give-idemia-${ENVIRONMENT_NAME}.apps.internal:8080
-    routes:
-      - name: idemia-route
-        methods:
-          - GET
-          - POST
-        hosts:
-         - give-${ENVIRONMENT_NAME}.app.cloud.gov
-        paths:
-          - /idemia
-        protocols:
-          - http
-  - name: usps-microservice
-    url: http://identity-give-usps-${ENVIRONMENT_NAME}.apps.internal:8080
-    routes:
-      - name: usps-route
-        methods:
-          - GET
-          - POST
-        hosts:
-         - give-${ENVIRONMENT_NAME}.app.cloud.gov
-        paths:
-          - /usps
-        protocols:
-          - http
   - name: sk-portal
     url: http://identity-give-sk-portal-${ENVIRONMENT_NAME}.apps.internal:8080
     routes:
