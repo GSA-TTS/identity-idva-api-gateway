@@ -49,13 +49,14 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: 18F/identity-give-cf-setup@v1
+        id: cf-setup
         with:
           cf-username: ${{ secrets.CF_USERNAME }}
           cf-password: ${{ secrets.CF_PASSWORD }}
           cf-org: ${{ secrets.CF_ORG }}
 
       - name: Deploy application
-        run: cf push --vars-file vars.yaml --var ENVIRONMENT_NAME=${{ steps.deployment-target.outputs.ENVIRONMENT_NAME }}
+        run: cf push --vars-file vars.yaml --var ENVIRONMENT_NAME=${{ steps.cf-setup.outputs.target-environment }}
 
       - name: Apply CF Network Policies
         run: |
