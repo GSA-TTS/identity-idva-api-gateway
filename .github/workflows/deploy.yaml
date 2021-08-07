@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: 18F/identity-give-cf-setup@v1
+      - uses: 18F/identity-give-cf-setup@v2
         id: cf-setup
         with:
           cf-username: ${{ secrets.CF_USERNAME }}
