@@ -56,7 +56,10 @@ jobs:
           cf-org: ${{ secrets.CF_ORG }}
 
       - name: Deploy application
-        run: cf push --vars-file vars.yaml --var ENVIRONMENT_NAME=${{ steps.cf-setup.outputs.target-environment }}
+        run: cf push
+          --vars-file vars.yaml
+          --var ENVIRONMENT_NAME=${{ steps.cf-setup.outputs.target-environment }}
+          --strategy rolling
 
       - name: Apply CF Network Policies
         run: |
