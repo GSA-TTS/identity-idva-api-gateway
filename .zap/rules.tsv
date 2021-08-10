@@ -1,2 +1,1 @@
-# zap rule configuration file
-40025 IGNORE (Proxy Disclosure)
+40025	IGNORE	(Proxy Disclosure)
