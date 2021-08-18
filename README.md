@@ -1,25 +1,25 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
-# GIVE API Gateway
-The Government Identity Verification Engine (GIVE) API gateway uses
+# IDVA API Gateway
+The Identity Verification API (IDVA) API gateway uses
 [Kong Gateway (OSS)](https://docs.konghq.com/gateway-oss/) to provide
-authentication and access to the rest of GIVE's microservices. GIVE uses a
+authentication and access to the rest of IDVA's microservices. IDVA uses a
 microservices architecture, and the API gateway serves as the entrypoint to
 those microservices.
 
 ## Why this project
-The GIVE API Gateway aims to provide secure, unified access to GIVE
-microservices. Without the gateway, GIVE would be a segmented collection of
+The IDVA API Gateway aims to provide secure, unified access to IDVA
+microservices. Without the gateway, IDVA would be a segmented collection of
 related APIs, which sounds much less useful than a unified API providing
 identity validation services. The API Gateway has the following goals:
-* Secure access to GIVE services
-* Provide a single entrypoint to GIVE services
+* Secure access to IDVA services
+* Provide a single entrypoint to IDVA services
 * Manage inbound/outbound traffic
 
 ## CI/CD Workflows with GitHub Actions
 The most up-to-date information about the CI/CD flows for this repo can be
-found in the [GitHub workflows directory](https://github.com/18F/identity-give-gateway-service/tree/main/.github/workflows)
+found in the [GitHub workflows directory](https://github.com/18F/identity-idva-gateway-service/tree/main/.github/workflows)
 
 ## Pre-requisites
 If you plan to develop a new feature or add new code to this repo, you'll need
@@ -63,7 +63,7 @@ on other's dev instances by changing:
 
 ## Admin API Access
 
-:warning: Since GIVE manages the Kong configuration with a declarative configuration file,
+:warning: Since IDVA manages the Kong configuration with a declarative configuration file,
 the admin API is set to read-only mode. Changes will have to be made by restarting kong with
 a new configuration file.
 

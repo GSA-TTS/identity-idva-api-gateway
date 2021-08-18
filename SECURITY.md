@@ -1,12 +1,12 @@
 # Security Policy
 
-The GIVE team takes the security of our software seriously. If you believe
-you have found a security vulnerability in any GIVE repository, please report
+The IDVA team takes the security of our software seriously. If you believe
+you have found a security vulnerability in any IDVA repository, please report
 it to us as described below.
 
 ## Supported Versions
 
-GIVE will only ever be providing security updates for the most recent
+IDVA will only ever be providing security updates for the most recent
 version of its software. This should always be available as the most recently
 tagged version within this repository. We will not be providing security
 updates to versions that are not currently released into production.
