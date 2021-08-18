@@ -11,10 +11,10 @@ applications:
       - https://github.com/cloudfoundry/binary-buildpack
     command: ./run.sh
     routes:
-      - route: give-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: give-api-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: give-portal-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: give-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: give-((ENVIRONMENT_NAME)).apps.internal
+      - route: idva-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-api-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-portal-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-((ENVIRONMENT_NAME)).apps.internal
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
