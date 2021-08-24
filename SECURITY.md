@@ -15,7 +15,7 @@ updates to versions that are not currently released into production.
 
 **Please do not report security vulnerabilities through public GitHub issues.**
 
-Instead, please report them by emailing email give@gsa.gov. You should receive
+Instead, please report them by emailing email idva@gsa.gov. You should receive
 a response within 72 hours. If for some reason you do not, please follow up via
 email to ensure we've received your original message.
 
