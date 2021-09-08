@@ -2,5 +2,5 @@
 repos:
   - deb [trusted=yes] https://download.konghq.com/gateway-2.x-ubuntu-bionic/ default all
 packages:
-  - kong=2.5.0
+  - kong=2.5.1
   - gettext-base
