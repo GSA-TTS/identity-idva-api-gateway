@@ -64,5 +64,3 @@ jobs:
       - name: Apply CF Network Policies
         run: |
           cf add-network-policy api-gateway sk-api
-          cf add-network-policy api-gateway sk-portal
-          cf add-network-policy api-gateway sk-sdk
