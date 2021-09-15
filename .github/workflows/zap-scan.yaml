@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: ZAP Scan (api)
-        uses: zaproxy/action-full-scan@v0.2.0
+        uses: zaproxy/action-full-scan@v0.3.0
         with:
           target: "https://idva-api-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: ZAP Scan (sdk)
-        uses: zaproxy/action-full-scan@v0.2.0
+        uses: zaproxy/action-full-scan@v0.3.0
         with:
           target: "https://idva-sdk-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: ZAP Scan (portal)
-        uses: zaproxy/action-full-scan@v0.2.0
+        uses: zaproxy/action-full-scan@v0.3.0
         with:
           target: "https://idva-portal-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
