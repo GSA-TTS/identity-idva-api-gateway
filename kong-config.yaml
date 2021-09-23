@@ -2,7 +2,7 @@
 _format_version: "1.1"
 services:
   - name: sk-api
-    url: http://identity-idva-sk-api-${ENVIRONMENT_NAME}.apps.internal:8080
+    url: https://identity-idva-sk-api-${ENVIRONMENT_NAME}.apps.internal:8080
     routes:
       - name: sk-api-route
         methods:
