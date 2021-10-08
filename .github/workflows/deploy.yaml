@@ -17,29 +17,7 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install decK CLI
-        run: |
-          brew tap kong/deck
-          brew install deck
-          deck version
-
-      - name: Validate the Kong config file
-        run: |
-          export ENVIRONMENT_NAME=dev
-          envsubst < kong-config.yaml > kong.yaml
-          deck validate --state kong.yaml
-
-      - name: Install Kong
-        run: |
-          echo "deb [trusted=yes] https://download.konghq.com/gateway-2.x-ubuntu-$(lsb_release -sc)/ default all" | sudo tee /etc/apt/sources.list.d/kong.list 
-          sudo apt-get update
-          sudo apt install -y kong
-
-      - name: Validate kong.conf file
-        run: kong check ./kong.conf
+    uses: 18F/identity-idva-api-gateway/.github/workflows/validate-config@main
 
   deploy:
     if: github.repository_owner == '18F'
