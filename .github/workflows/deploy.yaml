@@ -17,7 +17,7 @@ on:
 
 jobs:
   validate:
-    uses: 18F/identity-idva-api-gateway/.github/workflows/validate-config@main
+    uses: 18F/identity-idva-api-gateway/.github/workflows/validate-config.yaml@main
 
   deploy:
     if: github.repository_owner == '18F'
