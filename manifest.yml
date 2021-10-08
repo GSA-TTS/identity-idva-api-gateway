@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: api-gateway
+  - name: kong
     stack: cflinuxfs3
     instances: ((INSTANCES))
     memory: ((MEMORY))
@@ -12,6 +12,6 @@ applications:
     command: ./run.sh
     routes:
       - route: idva-api-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: idva-((ENVIRONMENT_NAME)).apps.internal
+      - route: identity-idva-kong-((ENVIRONMENT_NAME)).apps.internal
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
