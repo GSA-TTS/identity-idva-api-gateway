@@ -11,6 +11,7 @@ on:
     # changed or not.
     paths:
       - 'kong-config.yaml'
+  workflow_call:
 
 jobs:
   validate:
