@@ -23,6 +23,7 @@ jobs:
         with:
           target: "https://idva-api-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
+          issue_title: "ZAP Full Scan Report - API"
 
   zap_scan_sdk:
     if: github.repository_owner == '18F'
@@ -36,6 +37,7 @@ jobs:
         with:
           target: "https://idva-sdk-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
+          issue_title: "ZAP Full Scan Report - SDK"
 
   zap_scan_portal:
     if: github.repository_owner == '18F'
@@ -49,3 +51,4 @@ jobs:
         with:
           target: "https://idva-portal-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
+          issue_title: "ZAP Full Scan Report - Portal"
