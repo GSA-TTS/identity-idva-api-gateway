@@ -5,14 +5,16 @@
 name: Zap-Scan
 
 on:
-  workflow_run:
-    workflows: ["Deploy"]
-    branches: [main]
-    types: [completed]
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+    paths-ignore:
+      - '**.md'  # All markdown files in the repository
 
 jobs:
   zap_scan_api:
-    if: github.repository_owner == '18F'
     runs-on: ubuntu-latest
     name: Scan the API Gateway - API
     steps:
@@ -26,7 +28,6 @@ jobs:
           issue_title: "ZAP Full Scan Report - API"
 
   zap_scan_sdk:
-    if: github.repository_owner == '18F'
     runs-on: ubuntu-latest
     name: Scan the API Gateway - SDK
     steps:
@@ -40,7 +41,6 @@ jobs:
           issue_title: "ZAP Full Scan Report - SDK"
 
   zap_scan_portal:
-    if: github.repository_owner == '18F'
     runs-on: ubuntu-latest
     name: Scan the API Gateway - Portal
     steps:
