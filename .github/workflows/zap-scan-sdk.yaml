@@ -24,5 +24,5 @@ jobs:
         uses: zaproxy/action-full-scan@v0.3.0
         with:
           target: "https://idva-sdk-dev.app.cloud.gov"
-          rules_file_name: ".zap/rules.tsv"
+          rules_file_name: ".zap/rules-sdk.tsv"
           issue_title: "ZAP Full Scan Report - SDK"
