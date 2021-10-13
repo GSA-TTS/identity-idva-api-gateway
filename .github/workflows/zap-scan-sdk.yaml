@@ -1,6 +1,6 @@
 ---
 # This workflow will run the OWASP ZAP web application security scanner against
-# the IDVA API Gateway
+# the IDVA SK SDK
 
 name: Zap-Scan-SDK
 
