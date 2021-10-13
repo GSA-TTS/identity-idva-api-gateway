@@ -2,7 +2,7 @@
 # This workflow will run the OWASP ZAP web application security scanner against
 # the IDVA API Gateway
 
-name: Zap-Scan-API
+name: Zap-Scan-SDK
 
 on:
   push:
@@ -16,13 +16,13 @@ on:
 jobs:
   zap_scan_api:
     runs-on: ubuntu-latest
-    name: Scan the API Gateway - API
+    name: Scan the API Gateway - SDK
     steps:
       - uses: actions/checkout@v2
 
-      - name: ZAP Scan (api)
+      - name: ZAP Scan (SDK)
         uses: zaproxy/action-full-scan@v0.3.0
         with:
-          target: "https://idva-api-dev.app.cloud.gov"
+          target: "https://idva-sdk-dev.app.cloud.gov"
           rules_file_name: ".zap/rules.tsv"
-          issue_title: "ZAP Full Scan Report - API"
+          issue_title: "ZAP Full Scan Report - SDK"
