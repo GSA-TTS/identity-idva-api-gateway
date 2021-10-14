@@ -19,7 +19,7 @@ there are no detectable format errors within the files. It will also install
 the kong tool and validate the kong.conf file
 
 ## OWASP ZAP Scans
-Runs a series of vulnerability scans using the [OWASP ZAP GitHub Action](https://github.com/marketplace/actions/owasp-zap-full-scan#:~:text=A%20GitHub%20Action%20for%20running%20the%20OWASP%20ZAP,a%20full%20active%20scan%20before%20reporting%20the%20results.) 
+Runs a series of vulnerability scans using the [OWASP ZAP GitHub Action](https://github.com/marketplace/actions/owasp-zap-full-scan) 
 against the three public IDVA services, the API Gateway, SingularKey SDK, 
 and SingularKey Portal. In order for each vulnerability scan to generate 
 a full report, each scan is run as a separate action. If a vulnerability is 
