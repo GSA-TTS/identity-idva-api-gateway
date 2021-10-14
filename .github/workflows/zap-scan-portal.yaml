@@ -1,0 +1,26 @@
+---
+# This workflow will run the OWASP ZAP web application security scanner against
+# the IDVA SK Portal
+
+name: Zap-Scan-Portal
+
+on:
+  workflow_run:
+    workflows: ["Deploy"]
+    branches: [main]
+    types: [completed]
+
+jobs:
+  zap_scan_api:
+    if: github.repository_owner == '18F'
+    runs-on: ubuntu-latest
+    name: Scan the SK Portal
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: ZAP Scan (Portal)
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          target: "https://idva-portal-dev.app.cloud.gov"
+          rules_file_name: ".zap/rules-portal.tsv"
+          issue_title: "ZAP Full Scan Report - Portal"
