@@ -14,7 +14,7 @@ jobs:
   zap_scan_api:
     if: github.repository_owner == '18F'
     runs-on: ubuntu-latest
-    name: Scan the API Gateway - Portal
+    name: Scan the SK Portal
     steps:
       - uses: actions/checkout@v2
 
