@@ -24,7 +24,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: 18F/identity-idva-cf-setup@v2
         id: cf-setup
