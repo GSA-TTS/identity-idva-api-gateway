@@ -11,6 +11,7 @@ on:
     # changed or not.
     paths:
       - 'kong-config.yaml'
+      - 'kong.conf.template'
   workflow_call:
 
 jobs:
