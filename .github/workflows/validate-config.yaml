@@ -29,7 +29,11 @@ jobs:
         run: |
           export ENVIRONMENT_NAME=dev
           envsubst < kong-config.yaml > kong.yaml
+          envsubst < kong.conf.template > kong.conf
           deck validate --state kong.yaml
+        env:
+          CF_INSTANCE_CERT: /path/to/cert.crt
+          CF_INSTANCE_KEY: /path/to/cert.key
 
       - name: Install Kong
         run: |
