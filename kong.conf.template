@@ -26,6 +26,9 @@ admin_listen = 127.0.0.1:8081 http2 ssl reuseport backlog=16384
 # Comma-separated list of addresses and ports on which the Status API should listen.
 status_listen = 0.0.0.0:8100 ssl
 
+status_ssl_cert = $CF_INSTANCE_CERT
+status_ssl_cert_key = $CF_INSTANCE_KEY
+
 # Set access log locations -> stdout
 proxy_access_log = /dev/stdout
 admin_access_log = /dev/stdout

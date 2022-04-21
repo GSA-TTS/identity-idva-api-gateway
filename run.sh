@@ -17,6 +17,7 @@ export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
 
 # Generate the kong.yaml state file
 /home/vcap/deps/0/apt/usr/bin/envsubst < kong-config.yaml > /home/vcap/app/kong.yaml
+/home/vcap/deps/0/apt/usr/bin/envsubst < kong.conf.template > /home/vcap/app/kong.conf
 
 # Start the main Kong application.
 kong start -c ./kong.conf --v
