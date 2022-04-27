@@ -1,8 +1,12 @@
 #!/bin/bash -e
 
 source ./set_kong_env.sh
+
+# wait to make sure the main kong process has started
 sleep 1m
-kong version # Sanity check to ensure 'kong' is on the current $PATH
+
+# Sanity check to ensure 'kong' is on the current $PATH
+kong version 
 
 instance_identity_cert_folder=$(dirname "$CF_INSTANCE_CERT")
 

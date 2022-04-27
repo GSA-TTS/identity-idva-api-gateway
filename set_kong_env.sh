@@ -8,8 +8,5 @@ export LUA_PATH="$LOCAL/share/lua/5.1/?.lua;$LOCAL/share/lua/5.1/?/init.lua;$LOC
 export LUA_CPATH="$LOCAL/lib/lua/5.1/?.so;$LOCAL/openresty/lualib/?.so"
 export PATH=$LOCAL/bin/:$LOCAL/openresty/nginx/sbin:$LOCAL/openresty/bin:$PATH
 
-# Ensure references to /usr/local resolve correctly
-
-
 export KONG_LUA_PACKAGE_PATH=$LUA_PATH
 export KONG_LUA_PACKAGE_CPATH=$LUA_CPATH
