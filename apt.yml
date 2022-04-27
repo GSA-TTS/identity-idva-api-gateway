@@ -4,3 +4,4 @@ repos:
 packages:
   - kong=2.7.1
   - gettext-base
+  - inotify-tools
