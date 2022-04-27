@@ -20,8 +20,8 @@ services:
     routes:
       - name: keycloak-route
         paths:
-          - /realms/
-          - /resources/
+          - /realms
+          - /resources
           - /robots.txt
         strip_path: false
         methods:
