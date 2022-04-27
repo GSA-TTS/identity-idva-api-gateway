@@ -34,11 +34,11 @@ services:
           - idva-keycloak-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
+    plugins:
+      - name: response-transformer
+        config: 
+          add:
+            headers:
+            - X-Frame-Options:ALLOWALL
 plugins:
   - name: prometheus
-  - name: response-transformer
-    route: keycloak-route
-    config: 
-      add:
-        headers:
-        - X-Frame-Options:ALLOWALL
