@@ -1,7 +1,7 @@
 ---
 # This workflow will validate the Kong decK configuration file
 
-name: Validate-Config-Work
+name: Validate-Config-Common
 
 on:
   workflow_call:

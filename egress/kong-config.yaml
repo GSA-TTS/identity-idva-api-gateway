@@ -1,0 +1,21 @@
+---
+_format_version: "1.1"
+services:
+  - name: authenticid
+    url: https://cfwebt.amalgam-east.ascendant.cloud
+    routes:
+      - name: authenticid-route
+        paths:
+          - /authenticid
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        hosts:
+          - idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal
+        protocols:
+          - http
+plugins:
+  - name: prometheus

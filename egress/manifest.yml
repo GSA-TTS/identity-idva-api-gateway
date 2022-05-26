@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: kong
+  - name: kong-egress
     stack: cflinuxfs3
     instances: ((INSTANCES))
     memory: ((MEMORY))
@@ -11,13 +11,13 @@ applications:
       - https://github.com/cloudfoundry/binary-buildpack
     command: ./run.sh
     routes:
-      - route: idva-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: idva-keycloak-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: idva-api-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: identity-idva-kong-((ENVIRONMENT_NAME)).apps.internal
+      - route: idva-kong-egress-((ENVIRONMENT_NAME)).apps.internal
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
     sidecars:
       - name: cert-watcher
         command: ./watch-certs.sh
         process_types: ['web']
+    metadata:
+      labels:
+        component: gateway
