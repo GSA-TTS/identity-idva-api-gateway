@@ -1,0 +1,23 @@
+---
+# This workflow will validate the Kong decK configuration file
+
+name: Validate-Config-Internal
+
+on:
+  pull_request:
+    # Only run the config validation if the config file has changed in a pull
+    # request. Don't add this to the push->branches->main section, as we still
+    # want pushes to the main branch to trigger a deployment whether the config
+    # changed or not.
+    paths:
+      - '/internal/kong-config.yaml'
+      - '/internal/kong.conf.template'
+      - '/common/kong-config.yaml'
+      - '/common/kong.conf.template'
+  workflow_call:
+
+jobs:
+  validate:
+    uses: ./.github/workflows/validate-config-common.yaml
+    with:
+      directory: internal

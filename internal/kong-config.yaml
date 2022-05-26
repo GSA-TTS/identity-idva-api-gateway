@@ -1,0 +1,53 @@
+---
+_format_version: "1.1"
+services:
+  - name: kibana
+    url: https://identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: kibana-route
+        paths:
+          - /kibana
+        protocols:
+          - http
+  - name: grafana
+    url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: grafana-route
+        paths:
+          - /grafana
+        protocols:
+          - http
+  - name: prometheus
+    url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: prometheus-route
+        paths:
+          - /prometheus
+        protocols:
+          - http
+  - name: alertmanager
+    url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: alertmanager-route
+        paths:
+          - /alertmanager
+        protocols:
+          - http
+  - name: locust
+    url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: locust-route
+        paths:
+          - /locust
+        protocols:
+          - http
+  - name: keycloak-internal
+    url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: keycloak-route
+        paths:
+          - /keycloak
+        protocols:
+          - http
+plugins:
+  - name: prometheus
