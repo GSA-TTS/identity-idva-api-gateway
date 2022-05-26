@@ -7,12 +7,6 @@ services:
       - name: authenticid-route
         paths:
           - /authenticid
-        methods:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - OPTIONS
         hosts:
           - idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal
         protocols:
