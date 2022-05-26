@@ -1,0 +1,23 @@
+---
+applications:
+  - name: kong-internal
+    stack: cflinuxfs3
+    instances: ((INSTANCES))
+    memory: ((MEMORY))
+    buildpacks:
+      # The ordering of these buildpacks matter! Do not change them
+      # without also modifying the run command accordingly.
+      - https://github.com/cloudfoundry/apt-buildpack
+      - https://github.com/cloudfoundry/binary-buildpack
+    command: ./run.sh
+    routes:
+      - route: idva-kong-internal-((ENVIRONMENT_NAME)).apps.internal
+    env:
+      ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
+    sidecars:
+      - name: cert-watcher
+        command: ./watch-certs.sh
+        process_types: ['web']
+    metadata:
+      labels:
+        component: gateway

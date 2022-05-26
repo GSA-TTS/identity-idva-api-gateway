@@ -1,0 +1,53 @@
+---
+# This workflow will validate the Kong decK state file and deploy
+# the application to a target environment
+
+name: Deploy Internal Kong
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+    paths:
+      - 'common/**'
+      - 'internal/**'
+      - '!**.md'  # ignore all markdown files
+  release:
+    types: [released]
+
+jobs:
+  validate:
+    uses: 18F/identity-idva-api-gateway/.github/workflows/validate-config-internal.yaml@main
+  deploy:
+    if: github.repository_owner == '18F'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: 18F/identity-idva-cf-setup@v2
+        id: cf-setup
+        with:
+          cf-username: ${{ secrets.CF_USERNAME }}
+          cf-password: ${{ secrets.CF_PASSWORD }}
+          cf-org: ${{ secrets.CF_ORG }}
+
+      - name: Copy common files
+        run: cp -an common/. internal/
+
+      - name: Deploy application
+        run: cf push
+          --vars-file vars.yaml
+          --var ENVIRONMENT_NAME=${{ steps.cf-setup.outputs.target-environment }}
+          --strategy rolling
+        working-directory: internal
+
+      - name: Apply CF Network Policies
+        run: |
+          cf add-network-policy kong-internal keycloak --protocol tcp --port 61443
+          cf add-network-policy kong-internal locust --protocol tcp --port 61443
+          cf add-network-policy kong-internal kibana --protocol tcp --port 61443
+          cf add-network-policy kong-internal grafana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
+          cf add-network-policy kong-internal prometheus --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
+          cf add-network-policy kong-internal alertmanager --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-public
