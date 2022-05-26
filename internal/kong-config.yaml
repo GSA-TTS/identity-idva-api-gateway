@@ -13,7 +13,6 @@ services:
     url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: grafana-route
-        hosts:
         paths:
           - /grafana
         protocols:
