@@ -36,6 +36,7 @@ jobs:
           cf-username: ${{ secrets.CF_USERNAME }}
           cf-password: ${{ secrets.CF_PASSWORD }}
           cf-org: ${{ secrets.CF_ORG }}
+          space-suffix: "-warpgate"
 
       - name: Copy common files
         run: cp -an common/. internal/
@@ -49,8 +50,8 @@ jobs:
 
       - name: Apply CF Network Policies
         run: |
-          cf add-network-policy kong-internal keycloak --protocol tcp --port 61443
-          cf add-network-policy kong-internal kibana --protocol tcp --port 61443
+          cf add-network-policy kong-internal keycloak --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
+          cf add-network-policy kong-internal kibana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
           cf add-network-policy kong-internal grafana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal prometheus --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal alertmanager --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-public

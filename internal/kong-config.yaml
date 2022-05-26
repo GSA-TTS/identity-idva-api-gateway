@@ -5,8 +5,8 @@ services:
     url: https://identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: kibana-route
-        hosts:
-          - identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /kibana
         protocols:
           - http
   - name: grafana
@@ -14,39 +14,40 @@ services:
     routes:
       - name: grafana-route
         hosts:
-          - identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /grafana
         protocols:
           - http
   - name: prometheus
     url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: prometheus-route
-        hosts:
-          - identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /prometheus
         protocols:
           - http
   - name: alertmanager
     url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: alertmanager-route
-        hosts:
-          - identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /alertmanager
         protocols:
           - http
   - name: locust
     url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: locust-route
-        hosts:
-          - identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /locust
         protocols:
           - http
   - name: keycloak-internal
     url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: keycloak-route
-        hosts:
-          - identity-idva-monitoring-keycloak-${ENVIRONMENT_NAME}.apps.internal
+        paths:
+          - /keycloak
         protocols:
           - http
 plugins:
