@@ -1,0 +1,53 @@
+---
+# This workflow will validate the Kong decK configuration file
+
+name: Validate-Config-Work
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        required: true
+        type: string
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install decK CLI
+        run: |
+          brew tap kong/deck
+          brew install deck
+          deck version
+
+      - name: Copy common files
+        run: cp -an common/. ${{ inputs.directory }}/
+
+      - name: Validate kong.yaml
+        run: |
+          export ENVIRONMENT_NAME=dev
+          envsubst < kong-config.yaml > kong.yaml
+          envsubst < kong.conf.template > kong.conf
+          deck validate --state kong.yaml
+        working-directory: ${{ inputs.directory }}
+        env:
+          CF_INSTANCE_CERT: /path/to/cert.crt
+          CF_INSTANCE_KEY: /path/to/cert.key
+
+      - name: Install Kong
+        run: |
+          echo "deb [trusted=yes] https://download.konghq.com/gateway-2.x-ubuntu-$(lsb_release -sc)/ default all" | sudo tee /etc/apt/sources.list.d/kong.list 
+          sudo apt-get update
+          sudo apt install -y kong
+
+      - name: Validate kong.conf file
+        run: |
+          envsubst < kong.conf.template > kong.conf
+          touch cert.crt cert.key
+          kong check ./kong.conf
+        working-directory: ${{ inputs.directory }}
+        env:
+          CF_INSTANCE_CERT: ./cert.crt
+          CF_INSTANCE_KEY: ./cert.key
