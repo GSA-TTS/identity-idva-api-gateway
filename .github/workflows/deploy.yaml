@@ -44,3 +44,4 @@ jobs:
         run: |
           cf add-network-policy kong sk-api --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
           cf add-network-policy kong keycloak --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
+          cf add-network-policy kong kong-egress --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
