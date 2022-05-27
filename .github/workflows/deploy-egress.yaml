@@ -2,7 +2,7 @@
 # This workflow will validate the Kong decK state file and deploy
 # the application to a target environment
 
-name: Deploy
+name: Deploy Egress Kong
 
 on:
   push:
@@ -10,15 +10,19 @@ on:
       - main
     tags:
       - '*'
-    paths-ignore:
-      - '**.md'  # All markdown files in the repository
+    paths:
+      - 'common/**'
+      - 'egress/**'
+      - '.github/workflows/*-egress.yaml'
+      - '.github/workflows/*-common.yaml'
   release:
     types: [released]
 
 jobs:
   validate:
-    uses: 18F/identity-idva-api-gateway/.github/workflows/validate-config.yaml@main
-
+    uses: ./.github/workflows/validate-config-common.yaml
+    with:
+      directory: egress
   deploy:
     if: github.repository_owner == '18F'
     needs: validate
@@ -32,16 +36,14 @@ jobs:
           cf-username: ${{ secrets.CF_USERNAME }}
           cf-password: ${{ secrets.CF_PASSWORD }}
           cf-org: ${{ secrets.CF_ORG }}
-          space-suffix: "-closed"
+          space-suffix: "-public"
+
+      - name: Copy common files
+        run: cp -an common/. egress/
 
       - name: Deploy application
         run: cf push
           --vars-file vars.yaml
           --var ENVIRONMENT_NAME=${{ steps.cf-setup.outputs.target-environment }}
           --strategy rolling
-
-      - name: Apply CF Network Policies
-        run: |
-          cf add-network-policy kong sk-api --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
-          cf add-network-policy kong keycloak --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
-          cf add-network-policy kong kong-egress --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-public
+        working-directory: egress

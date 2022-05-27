@@ -40,5 +40,16 @@ services:
           add:
             headers:
             - X-Frame-Options:ALLOWALL
+  - name: authenticid
+    url: https://idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: authenticid-route
+        paths:
+          - /authenticid
+        strip_path: false
+        hosts:
+          - idva-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
 plugins:
   - name: prometheus
