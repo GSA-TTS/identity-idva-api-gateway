@@ -36,6 +36,7 @@ jobs:
           cf-username: ${{ secrets.CF_USERNAME }}
           cf-password: ${{ secrets.CF_PASSWORD }}
           cf-org: ${{ secrets.CF_ORG }}
+          space-suffix: "-public"
 
       - name: Copy common files
         run: cp -an common/. egress/
