@@ -14,6 +14,8 @@ applications:
       - route: idva-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-keycloak-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-api-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
+      - route: idva-portal-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: identity-idva-kong-((ENVIRONMENT_NAME)).apps.internal
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
