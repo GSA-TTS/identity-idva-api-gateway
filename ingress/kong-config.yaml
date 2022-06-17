@@ -25,6 +25,21 @@ services:
           - idva-sdk-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
+  - name: flow-client
+    url: https://idva-flow-client-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: flow-client-host-route
+        hosts:
+          - idva-client-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
+      - name: flow-client-path-route
+        paths:
+          - /client
+        hosts:
+          - idva-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
   - name: keycloak
     url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
