@@ -9,11 +9,13 @@ services:
           - identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: kibana-path-route
         paths:
           - /kibana
         protocols:
           - http
+
   - name: grafana
     url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
@@ -22,37 +24,43 @@ services:
           - identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: grafana-path-route
         paths:
           - /grafana
         protocols:
           - http
+
   - name: prometheus
-    url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443/prometheus/
     routes:
       - name: prometheus-host-route
         hosts:
           - identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: prometheus-path-route
         paths:
           - /prometheus
         protocols:
           - http
+
   - name: alertmanager
-    url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443/alertmanager/
     routes:
       - name: alertmanager-host-route
         hosts:
           - identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: alertmanager-path-route
         paths:
           - /alertmanager
         protocols:
           - http
+
   - name: locust
     url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
@@ -61,11 +69,13 @@ services:
           - identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: locust-path-route
         paths:
           - /locust
         protocols:
           - http
+
   - name: keycloak-internal
     url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
@@ -74,6 +84,7 @@ services:
           - identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal
         protocols:
           - http
+
       - name: keycloak-path-route
         paths:
           - /keycloak
