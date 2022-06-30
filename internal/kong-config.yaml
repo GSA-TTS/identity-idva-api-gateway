@@ -2,7 +2,7 @@
 _format_version: "1.1"
 services:
   - name: kibana
-    url: https://identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: kibana-host-route
         hosts:
@@ -17,7 +17,7 @@ services:
           - http
 
   - name: grafana
-    url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: grafana-host-route
         hosts:
@@ -30,9 +30,10 @@ services:
           - /grafana
         protocols:
           - http
+        strip_path: false
 
   - name: prometheus
-    url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443/prometheus/
+    url: https://identity-idva-monitoring-prometheus-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: prometheus-host-route
         hosts:
@@ -45,9 +46,10 @@ services:
           - /prometheus
         protocols:
           - http
+        strip_path: false
 
   - name: alertmanager
-    url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443/alertmanager/
+    url: https://identity-idva-monitoring-alertmanager-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: alertmanager-host-route
         hosts:
@@ -60,9 +62,10 @@ services:
           - /alertmanager
         protocols:
           - http
+        strip_path: false
 
   - name: locust
-    url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: locust-host-route
         hosts:
@@ -77,7 +80,7 @@ services:
           - http
 
   - name: keycloak-internal
-    url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
+    url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443/
     routes:
       - name: keycloak-host-route
         hosts:
@@ -90,5 +93,6 @@ services:
           - /keycloak
         protocols:
           - http
+
 plugins:
   - name: prometheus
