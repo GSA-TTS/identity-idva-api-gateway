@@ -24,13 +24,13 @@ jobs:
     with:
       directory: egress
   deploy:
-    if: github.repository_owner == '18F'
+    if: github.repository_owner == 'GSA-TTS'
     needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - uses: 18F/identity-idva-cf-setup@v2
+      - uses: GSA-TTS/identity-idva-cf-setup@v2
         id: cf-setup
         with:
           cf-username: ${{ secrets.CF_USERNAME }}
