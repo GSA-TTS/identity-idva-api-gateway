@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/18F/identity-give-gateway-service/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/51007637d64a020ca966/maintainability)](https://codeclimate.com/github/GSA-TTS/identity-idva-api-gateway/maintainability)
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 # IDVA API Gateway
@@ -19,7 +19,7 @@ identity validation services. The API Gateway has the following goals:
 
 ## CI/CD Workflows with GitHub Actions
 The most up-to-date information about the CI/CD flows for this repo can be
-found in the [GitHub workflows directory](https://github.com/18F/identity-idva-gateway-service/tree/main/.github/workflows)
+found in the [GitHub workflows directory](https://github.com/GSA-TTS/identity-idva-api-gateway/tree/main/.github/workflows)
 
 ## Pre-requisites
 If you plan to develop a new feature or add new code to this repo, you'll need
