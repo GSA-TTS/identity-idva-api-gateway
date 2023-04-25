@@ -6,7 +6,7 @@ services:
     routes:
       - name: authenticid-route
         paths:
-          - /authenticid
+          - /wombat
         protocols:
           - http
 plugins:
