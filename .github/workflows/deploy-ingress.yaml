@@ -52,6 +52,7 @@ jobs:
       - name: Apply CF Network Policies
         run: |
           cf add-network-policy kong sk-api --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
+          cf add-network-policy kong incode --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
           cf add-network-policy kong sk-sdk --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong sk-portal --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong keycloak --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}

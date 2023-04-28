@@ -55,10 +55,18 @@ services:
     routes:
       - name: authenticid-route
         paths:
-          - /authenticid
+          - /wombat
         strip_path: false
         hosts:
           - idva-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
+  - name: incode
+    url: https://idva-incode-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: incode-route
+        hosts:
+          - idva-marmot-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
 plugins:
