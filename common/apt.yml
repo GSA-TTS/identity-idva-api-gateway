@@ -1,7 +1,7 @@
 ---
 repos:
-  - deb [trusted=yes] https://download.konghq.com/gateway-3.x-ubuntu-bionic/ default all
+  - deb https://download.konghq.com/gateway-3.x-ubuntu-bionic/ default all
 packages:
-  - kong=3.2.2.1
+  - kong=3.2.2
   - gettext-base
   - inotify-tools
