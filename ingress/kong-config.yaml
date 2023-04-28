@@ -65,11 +65,8 @@ services:
     url: https://idva-incode-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
       - name: incode-route
-        paths:
-          - /marmot
-        strip_path: false
         hosts:
-          - idva-${ENVIRONMENT_NAME}.app.cloud.gov
+          - idva-marmot-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
 plugins:
