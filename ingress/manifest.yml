@@ -1,7 +1,7 @@
 ---
 applications:
   - name: kong
-    stack: cflinuxfs3
+    stack: cflinuxfs4
     instances: ((INSTANCES))
     memory: ((MEMORY))
     buildpacks:
@@ -17,6 +17,7 @@ applications:
       - route: idva-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-portal-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: identity-idva-kong-((ENVIRONMENT_NAME)).apps.internal
+      - route: idva-marmot-((ENVIRONMENT_NAME)).app.cloud.gov
     env:
       ENVIRONMENT_NAME: ((ENVIRONMENT_NAME))
     sidecars:
