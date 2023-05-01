@@ -1,7 +1,7 @@
 ---
 applications:
   - name: kong-internal
-    stack: cflinuxfs3
+    stack: cflinuxfs4
     instances: ((INSTANCES))
     memory: ((MEMORY))
     buildpacks:
