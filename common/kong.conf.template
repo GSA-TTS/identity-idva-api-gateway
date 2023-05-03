@@ -20,6 +20,9 @@ declarative_config = /home/vcap/app/kong.yaml
 #proxy_listen = off # 0.0.0.0:8080
 proxy_listen = 0.0.0.0:8080
 
+# Trust traffic coming from envoy proxy
+trusted_ips = 10.0.0.0/8
+
 # Comma-separated list of addresses and ports on which the Admin interface should listen.
 admin_listen = 127.0.0.1:8081 http2 ssl reuseport backlog=16384
 
