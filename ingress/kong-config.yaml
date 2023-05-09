@@ -25,31 +25,6 @@ services:
           - idva-sdk-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
-  - name: keycloak
-    url: https://identity-idva-keycloak-${ENVIRONMENT_NAME}.apps.internal:61443
-    routes:
-      - name: keycloak-route
-        paths:
-          - /realms
-          - /resources
-          - /robots.txt
-        strip_path: false
-        methods:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - OPTIONS
-        hosts:
-          - idva-keycloak-${ENVIRONMENT_NAME}.app.cloud.gov
-        protocols:
-          - http
-    plugins:
-      - name: response-transformer
-        config: 
-          add:
-            headers:
-            - X-Frame-Options:ALLOWALL
   - name: authenticid
     url: https://idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
