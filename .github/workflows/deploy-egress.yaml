@@ -7,7 +7,7 @@ name: Deploy Egress Kong
 on:
   push:
     branches:
-      - main
+      - pre
     tags:
       - '*'
     paths:

@@ -7,7 +7,7 @@ name: Deploy Internal Kong
 on:
   push:
     branches:
-      - main
+      - pre
     tags:
       - '*'
     paths:
