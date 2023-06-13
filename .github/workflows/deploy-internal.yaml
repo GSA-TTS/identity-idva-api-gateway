@@ -50,8 +50,6 @@ jobs:
 
       - name: Apply CF Network Policies
         run: |
-          cf add-network-policy kong-internal keycloak --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
-          cf add-network-policy kong-internal kibana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
           cf add-network-policy kong-internal grafana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal prometheus --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal alertmanager --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-public
