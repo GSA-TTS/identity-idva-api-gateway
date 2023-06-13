@@ -1,20 +1,6 @@
 ---
 _format_version: "1.1"
 services:
-  - name: kibana
-    url: https://identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal:61443/kibana/
-    routes:
-      - name: kibana-host-route
-        hosts:
-          - identity-idva-monitoring-kibana-${ENVIRONMENT_NAME}.apps.internal
-        protocols:
-          - http
-
-      - name: kibana-path-route
-        paths:
-          - /kibana
-        protocols:
-          - http
 
   - name: grafana
     url: https://identity-idva-monitoring-grafana-${ENVIRONMENT_NAME}.apps.internal:61443/
@@ -63,21 +49,6 @@ services:
         protocols:
           - http
         strip_path: false
-
-  - name: locust
-    url: https://identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal:61443/
-    routes:
-      - name: locust-host-route
-        hosts:
-          - identity-idva-monitoring-locust-${ENVIRONMENT_NAME}.apps.internal
-        protocols:
-          - http
-
-      - name: locust-path-route
-        paths:
-          - /locust
-        protocols:
-          - http
 
 plugins:
   - name: prometheus
