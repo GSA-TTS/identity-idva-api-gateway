@@ -53,3 +53,4 @@ jobs:
           cf add-network-policy kong-internal grafana --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal prometheus --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-closed
           cf add-network-policy kong-internal alertmanager --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}-public
+          cf add-network-policy kong-internal es-proxy --protocol tcp --port 61443 -s ${{ steps.cf-setup.outputs.target-environment }}
