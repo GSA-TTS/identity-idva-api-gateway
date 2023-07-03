@@ -50,5 +50,21 @@ services:
           - http
         strip_path: false
 
+  - name: esdashboard
+    url: https://identity-idva-es-proxy-${ENVIRONMENT_NAME}.apps.internal:61443/
+    routes:
+      - name: esdashboard-host-route
+        hosts:
+          - identity-idva-monitoring-es-proxy-${ENVIRONMENT_NAME}.apps.internal
+        protocols:
+          - http
+
+      - name: esdashboard-path-route
+        paths:
+          - /_dashboards
+        protocols:
+          - http
+        strip_path: false
+
 plugins:
   - name: prometheus
