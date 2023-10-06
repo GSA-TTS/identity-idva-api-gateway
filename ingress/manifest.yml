@@ -12,7 +12,6 @@ applications:
     command: ./run.sh
     routes:
       - route: idva-((ENVIRONMENT_NAME)).app.cloud.gov
-      - route: idva-keycloak-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-api-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-sdk-((ENVIRONMENT_NAME)).app.cloud.gov
       - route: idva-portal-((ENVIRONMENT_NAME)).app.cloud.gov
