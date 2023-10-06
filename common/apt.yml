@@ -1,7 +1,9 @@
 ---
+keys:
+- https://packages.konghq.com/public/gateway-34/gpg.6B5D054B0707DE3B.key
 repos:
-  - deb [trusted=yes] https://download.konghq.com/gateway-3.x-ubuntu-jammy/ default all
+- deb https://packages.konghq.com/public/gateway-34/deb/ubuntu jammy main
 packages:
-  - kong=3.4.0
+  - kong=3.4.1
   - gettext-base
   - inotify-tools
