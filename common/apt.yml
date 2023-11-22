@@ -4,6 +4,6 @@ keys:
 repos:
 - deb https://packages.konghq.com/public/gateway-34/deb/ubuntu jammy main
 packages:
-  - kong=3.4.1
+  - kong=3.5.0
   - gettext-base
   - inotify-tools
