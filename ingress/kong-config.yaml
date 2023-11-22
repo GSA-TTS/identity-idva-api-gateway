@@ -25,6 +25,14 @@ services:
           - idva-sdk-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
+  - name: token
+    url: https://identity-idva-token-service-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: token-route
+        hosts:
+          - identity-idva-token-service-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
   - name: authenticid
     url: https://idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
