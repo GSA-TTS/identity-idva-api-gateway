@@ -1,8 +1,8 @@
 ---
 keys:
-- https://packages.konghq.com/public/gateway-34/gpg.6B5D054B0707DE3B.key
+- https://packages.konghq.com/public/gateway-35/gpg.501204D36929F3AE.key
 repos:
-- deb https://packages.konghq.com/public/gateway-34/deb/ubuntu jammy main
+- deb https://packages.konghq.com/public/gateway-35/deb/ubuntu jammy main
 packages:
   - kong=3.5.0
   - gettext-base
