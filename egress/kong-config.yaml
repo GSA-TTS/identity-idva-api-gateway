@@ -9,5 +9,13 @@ services:
           - /wombat
         protocols:
           - http
+  - name: socure
+    url: https://verify-v2.general.socure.com/
+    routes:
+      - name: socure-route
+        paths:
+          - /badger
+        protocols:
+          - http
 plugins:
   - name: prometheus

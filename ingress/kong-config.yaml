@@ -44,6 +44,17 @@ services:
           - idva-${ENVIRONMENT_NAME}.app.cloud.gov
         protocols:
           - http
+  - name: socure
+    url: https://idva-kong-egress-${ENVIRONMENT_NAME}.apps.internal:61443
+    routes:
+      - name: socure-route
+        paths:
+          - /badger
+        strip_path: false
+        hosts:
+          - idva-${ENVIRONMENT_NAME}.app.cloud.gov
+        protocols:
+          - http
   - name: incode
     url: https://idva-incode-${ENVIRONMENT_NAME}.apps.internal:61443
     routes:
