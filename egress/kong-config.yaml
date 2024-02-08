@@ -10,7 +10,7 @@ services:
         protocols:
           - http
   - name: socure
-    url: https://general.socure.com/
+    url: https://verify-v2.general.socure.com/
     routes:
       - name: socure-route
         paths:
