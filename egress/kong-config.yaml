@@ -14,7 +14,7 @@ services:
     routes:
       - name: socure-route
         paths:
-          - /badger
+          - /vendor
         protocols:
           - http
 plugins:
