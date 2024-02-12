@@ -49,7 +49,7 @@ services:
     routes:
       - name: socure-route
         paths:
-          - /badger
+          - /vendor
         strip_path: false
         hosts:
           - idva-${ENVIRONMENT_NAME}.app.cloud.gov
